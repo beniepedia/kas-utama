@@ -1,30 +1,5 @@
-<?php
+<?php echo $this->include('auth/header') ?>
 
-$db = new App\Models\settingModel(); ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?= strtoupper($db->setting()->nama_app); ?> | Log in</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/icheck-bootstrap/icheck-bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?= base_url('assets'); ?>/css/adminlte.min.css">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/sweetalert2/sweetalert2.min.css">
-    <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="<?= base_url('assets') ?>/plugins/jquery/jquery.min.js"></script>
-</head>
 
 <body class="hold-transition login-page">
     <div class="login-box">
@@ -84,7 +59,7 @@ $db = new App\Models\settingModel(); ?>
                 <!-- /.social-auth-links -->
                 <hr>
                 <p class="mb-1">
-                    <a href="<?= base_url('auth/lockscreen') ?>"><small>I forgot my password</small></a>
+                    <a href="<?= base_url('auth/lupa-password') ?>"><small>Lupa password</small></a>
                 </p>
                 <p class="mb-0">
                     <a href="<?= base_url('register') ?>" class="text-center"><small>Daftar akun baru</small></a>
@@ -94,14 +69,7 @@ $db = new App\Models\settingModel(); ?>
         </div>
     </div>
     <!-- /.login-box -->
-    <!-- jQUery Validate -->
-    <script src="<?= base_url('assets') ?>/plugins/jquery-validate/js/jquery-validate.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="<?= base_url('assets') ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="<?= base_url('assets'); ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?= base_url('assets'); ?>/js/adminlte.min.js"></script>
+
     <script src="<?= base_url('assets'); ?>/js/login.js"></script>
 
     <?php if (session()->getFlashdata('pesan')) : ?>
@@ -116,6 +84,5 @@ $db = new App\Models\settingModel(); ?>
             });
         </script>
     <?php endif ?>
-</body>
 
-</html>
+    <?php echo $this->include('auth/footer') ?>

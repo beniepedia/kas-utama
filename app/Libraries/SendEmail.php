@@ -22,23 +22,31 @@ class SendEmail
     }
 
 
-    public static function verifikasi($email, $nama, $token)
+
+    public static function system($type, $email, $nama, $token)
     {
         $sendEmail = self::emailset();
 
-        $sendEmail->setFrom('beniepedia@gmail.com', 'MY APP');
-        $sendEmail->setTo($email);
-        $sendEmail->setSubject('Verifikasi Email registrasi');
-
         $data = [
             'nama' => $nama,
-            'token' => $token
+            'token' => $token,
+            'email' => $email,
         ];
 
-        $body = view('App\Views\email\verifikasi', $data);
+        if ($type === 'verifikasi') {
+            $sendEmail->setSubject('Verifikasi Email registrasi');
+            $body = view('App\Views\email\verifikasi', $data);
+        } elseif ($type === 'lupaPassword') {
+            $sendEmail->setSubject('Permintaan reset password');
+            $body = view('App\Views\email\lupapassword', $data);
+        }
+
+        $sendEmail->setFrom('beniepedia@gmail.com', 'MY APP');
+
+        $sendEmail->setTo($email);
 
         $sendEmail->setMessage($body);
 
-        $sendEmail->send();
+        return $sendEmail->send();
     }
 }

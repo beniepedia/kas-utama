@@ -31,14 +31,19 @@ class Auth extends Controller
     public function login()
     {
 
-        return view('auth/v_login');
+        $data = [
+            'db' => new \App\Models\settingModel()
+        ];
+
+        return view('auth/v_login', $data);
     }
 
     public function register()
     {
-
-        return view('auth/v_register');
-        // return view('email/verifikasi');
+        $data = [
+            'db' => new \App\Models\settingModel()
+        ];
+        return view('auth/v_register', $data);
     }
 
     public function login_proses()
@@ -62,6 +67,65 @@ class Auth extends Controller
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
+
+    public function lupa_password()
+    {
+        if (isset($_POST['email'])) {
+            if ($this->request->isAJAX()) {
+                $cek = $this->authModel->lupa_password();
+                return json_encode($cek);
+            }
+        }
+        $data = [
+            'db' => new \App\Models\settingModel()
+        ];
+        return view('auth/v_lupa_password', $data);
+    }
+
+    public function reset_password()
+    {
+        $email = $this->request->getGet('email');
+        $token = $this->request->getGet('token');
+
+        $config         = new \Config\Encryption();
+        $config->key    = 'aBigsecret_ofAtleast32Characters';
+        $config->driver = 'OpenSSL';
+        $encrypter = \Config\Services::encrypter($config);
+
+        $db = \Config\Database::connect();
+
+        if (isset($_POST['password']) && isset($_POST['passconf'])) {
+            if ($this->request->isAJAX()) {
+                $email_dec = $encrypter->decrypt(base64_decode($this->request->getPost('id')));
+                $data = [
+                    'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                ];
+                $update_pasword =  $this->authModel->where('email', $email_dec)->set($data)->update();
+                if ($update_pasword) {
+                    $db->table('user_token')->where('email', $email_dec)->delete();
+                    $output['status'] = 'success';
+                    $output['msg']    = 'Kata sandi berhasil di setel ulang. Silahkan login menggunakan kata sandi baru.';
+                }
+
+                return json_encode($output);
+            }
+        }
+
+        $cek_user = $db->table('user_token')->where(['email' => $email, 'token' => $token])->get()->getRowObject();
+        if (!$cek_user) {
+            return redirect()->to('/login');
+        }
+
+
+
+        $data = [
+            'db' => new \App\Models\settingModel(),
+            'id' => base64_encode($encrypter->encrypt($cek_user->email)),
+        ];
+
+        return view('auth/v_reset_password', $data);
+    }
+
 
     public function verifikasi($token = '')
     {

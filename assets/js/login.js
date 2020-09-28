@@ -28,10 +28,10 @@ function countDown(date, messsage, id) {
       `<div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <div class="text-center"><small>${messsage}<br><b>` +
-        minutes +
-        ` menit ` +
-        seconds +
-        ` detik</b></small></div>
+      minutes +
+      ` menit ` +
+      seconds +
+      ` detik</b></small></div>
             </div>`
     );
     // Jika hitungan mundur selesai,
@@ -95,8 +95,8 @@ $(document).ready(function () {
     },
     messages: {
       email: {
-        required: "Email tidak boleh kosong",
-        email: "Format email salah, coba lagi...",
+        required: "Email tidak boleh kosong.",
+        email: "Format email tidak sesuai.",
       },
       password: {
         required: "Password tidak boleh kosong",

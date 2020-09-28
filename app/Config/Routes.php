@@ -61,6 +61,7 @@ $routes->get('/', 'Auth::login', ['filter' => 'auth']);
 $routes->get('/login', 'Auth::login', ['filter' => 'auth']);
 $routes->get('/register', 'Auth::register', ['filter' => 'auth']);
 $routes->get('/verifikasi/(:any)', 'Auth::verifikasi/$1', ['filter' => 'auth']);
+$routes->get('/reset-password', 'Auth::reset_password', ['filter' => 'auth']);
 
 
 $routes->get('access_blocked', 'Access_blocked::index');

@@ -46,7 +46,8 @@ class AuthModel extends Model
                         if (password_verify($password, $user['password']) == 1) {
                             if ($user['status'] == 1) {
                                 // cek user aktif
-                                $this->delete_attempt($user['id_pengguna']);
+                                $this->_delete_attempt($user['id_pengguna']);
+                                $this->_delete_user_token($email);
                                 $setData = [
                                     'isLogged' => true,
                                     'userId' => $user['id_pengguna'],
@@ -74,12 +75,12 @@ class AuthModel extends Model
                     }
                 } else {
                     // cek user belum verifikasi
-                    $this->delete_attempt($user['id_pengguna']);
+                    $this->_delete_attempt($user['id_pengguna']);
                     $result['error'] = 5;
                     $result['msg'] = 'Email anda belum diverifikasi. Silahkan cek inbox emial anda untuk verifikasi email.';
                 }
             } else {
-                $this->delete_attempt($user['id_pengguna']);
+                $this->_delete_attempt($user['id_pengguna']);
                 $result['error'] = 4;
                 $result['msg'] = 'Akun anda diblokir. Hubungi admin untuk membuka akun anda.';
             }
@@ -110,7 +111,7 @@ class AuthModel extends Model
         $this->insert($data);
         if ($this->affectedRows() == 1) {
             if ($this->_token_insert($email, $token)) {
-                sendEmail::verifikasi($email, $nama, $token);
+                sendEmail::system('verifikasi', $email, $nama, $token);
                 $output['status'] = 'success';
                 $output['msg'] = "Kami sudah mengirimkan email verifikasi ke <b>{$email}</b>. Cek kotak masuk email anda dan lakukan verifikasi.";
             } else {
@@ -121,6 +122,30 @@ class AuthModel extends Model
         } else {
             $output['status'] = 'error';
             $output['msg'] = 'Terjadi kesalahan pada sistem kami. Ulangi beberapa saat lagi atau hubungi kami';
+        }
+
+        return $output;
+    }
+
+    public function lupa_password()
+    {
+        $email = trim($this->request->getPost('email'));
+        $token = random_string('crypto', 64);
+        $userData = $this->where(['email' => $email, 'status' => 1])->get()->getRowObject();
+        if ($userData) {
+            $cek_user_token = $this->_cek_user_token($email);
+            if (!$cek_user_token) {
+                $this->_token_insert($email, $token);
+                sendEmail::system('lupaPassword', $userData->email, $userData->nama, $token);
+                $output['error'] = 0;
+                $output['msg']   = "Permitaan setel ulang kata sandi berhasil. Cek inbox email kamu untuk petunjuk setel ulang kata sandi";
+            } else {
+                $output['error'] = 2;
+                $output['msg']   = "Kamu sudah pernah melakukan permintaan setel ulang kata sandi sebelumnya. Silahkan cek kotak masuk email anda.";
+            }
+        } else {
+            $output['error'] = 1;
+            $output['msg']   = "Email tidak terdaftar atau belum aktif. Pastikan email kamu sudah terdaftar atau terverifikasi";
         }
 
         return $output;
@@ -148,7 +173,7 @@ class AuthModel extends Model
         $this->db->table('attempt')->insert($data);
     }
 
-    public function delete_attempt($id)
+    public function _delete_attempt($id)
     {
         $output['error'] = '';
         $output['msg'] = '';
@@ -179,5 +204,15 @@ class AuthModel extends Model
         ];
         $insert = $this->db->table('user_token')->insert($data);
         return $insert->resultID;
+    }
+
+    private function _cek_user_token($email)
+    {
+        return $this->db->table('user_token')->where('email', $email)->get()->getRowObject();
+    }
+
+    private function _delete_user_token($email)
+    {
+        $delete = $this->db->table('user_token')->where('email', $email)->delete();
     }
 }

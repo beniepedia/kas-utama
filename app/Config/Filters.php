@@ -39,6 +39,8 @@ class Filters extends BaseConfig
 				'auth/register_proses',
 				'auth/remove_attempt',
 				'auth/email_cek',
+				'auth/lupa_password',
+				'auth/reset_password',
 
 				'hak-akses/hapus',
 				'hak-akses/proses',
@@ -54,6 +56,7 @@ class Filters extends BaseConfig
 				'/login',
 				'/register',
 				'/verifikasi/*',
+				'/reset-password',
 				'auth/login_proses',
 				'auth/register_proses',
 				'auth/remove_attempt',
