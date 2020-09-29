@@ -21,5 +21,11 @@ class Dashboard extends BaseController
         ];
 
         return view('dashboard/v_dashboard', $data);
+        // $data = [
+        //     'email' => 'dasdsad',
+        //     'nama' => 'dasdsadwe',
+        //     'token' => 'dsadsada',
+        // ];
+        // return view('email/lupapassword', $data);
     }
 }

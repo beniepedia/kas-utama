@@ -291,3 +291,48 @@ CRITICAL - 2020-09-29 22:35:17 --> Duplicate entry '082174416077' for key 'no_hp
 #10 C:\Users\Ahmad Qomaini\Desktop\kas\index.php(44): CodeIgniter\CodeIgniter->run()
 #11 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(34): require_once('C:\\Users\\Ahmad ...')
 #12 {main}
+CRITICAL - 2020-09-29 23:33:56 --> unlink(writable/user_image/): Is a directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(writable...', 'C:\\Users\\Ahmad ...', 79, Array)
+#1 C:\Users\Ahmad Qomaini\Desktop\kas\app\Controllers\Profile.php(79): unlink('writable/user_i...')
+#2 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(918): App\Controllers\Profile->ganti_photo()
+#3 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Profile))
+#4 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\Users\Ahmad Qomaini\Desktop\kas\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(34): require_once('C:\\Users\\Ahmad ...')
+#7 {main}
+CRITICAL - 2020-09-29 23:33:58 --> unlink(writable/user_image/): Is a directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(writable...', 'C:\\Users\\Ahmad ...', 79, Array)
+#1 C:\Users\Ahmad Qomaini\Desktop\kas\app\Controllers\Profile.php(79): unlink('writable/user_i...')
+#2 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(918): App\Controllers\Profile->ganti_photo()
+#3 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Profile))
+#4 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\Users\Ahmad Qomaini\Desktop\kas\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(34): require_once('C:\\Users\\Ahmad ...')
+#7 {main}
+CRITICAL - 2020-09-29 23:34:00 --> unlink(writable/user_image/): Is a directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(writable...', 'C:\\Users\\Ahmad ...', 79, Array)
+#1 C:\Users\Ahmad Qomaini\Desktop\kas\app\Controllers\Profile.php(79): unlink('writable/user_i...')
+#2 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(918): App\Controllers\Profile->ganti_photo()
+#3 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Profile))
+#4 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\Users\Ahmad Qomaini\Desktop\kas\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(34): require_once('C:\\Users\\Ahmad ...')
+#7 {main}
+CRITICAL - 2020-09-29 23:34:01 --> unlink(writable/user_image/): Is a directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(writable...', 'C:\\Users\\Ahmad ...', 79, Array)
+#1 C:\Users\Ahmad Qomaini\Desktop\kas\app\Controllers\Profile.php(79): unlink('writable/user_i...')
+#2 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(918): App\Controllers\Profile->ganti_photo()
+#3 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Profile))
+#4 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\Users\Ahmad Qomaini\Desktop\kas\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(34): require_once('C:\\Users\\Ahmad ...')
+#7 {main}
+CRITICAL - 2020-09-29 23:34:08 --> unlink(writable/user_image/): Is a directory
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'unlink(writable...', 'C:\\Users\\Ahmad ...', 79, Array)
+#1 C:\Users\Ahmad Qomaini\Desktop\kas\app\Controllers\Profile.php(79): unlink('writable/user_i...')
+#2 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(918): App\Controllers\Profile->ganti_photo()
+#3 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(404): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Profile))
+#4 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\CodeIgniter.php(312): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\Users\Ahmad Qomaini\Desktop\kas\index.php(44): CodeIgniter\CodeIgniter->run()
+#6 C:\Users\Ahmad Qomaini\Desktop\kas\vendor\codeigniter4\framework\system\Commands\Server\rewrite.php(34): require_once('C:\\Users\\Ahmad ...')
+#7 {main}
