@@ -120,6 +120,10 @@
                 ajxPost(Form.attr('action'), Form.serialize()).done((respon) => {
                     notif(respon.type, respon.title, respon.msg, true);
                     loadData();
+                }).fail((e) => {
+
+                    loadData();
+                    mini_notif('error', 'Update profil gagal!');
                 });
 
                 // $.ajax({

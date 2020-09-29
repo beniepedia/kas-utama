@@ -76,18 +76,23 @@
 
 <script>
     $(document).ready(function() {
-        $image_crop = $("#image_crop").croppie({
+        var $image_crop = $("#image_crop").croppie({
             enableExif: true,
             viewport: {
-                width: 250,
-                height: 250,
+                width: 300,
+                height: 300,
                 type: 'square',
+                // circle
             },
             boundary: {
                 width: 400,
                 height: 400,
-            }
+            },
+            mouseWheelZoom: 'ctrl',
+            showZoomer: true
         });
+
+
 
         $("#image_upload").change(function() {
             let reader = new FileReader();
@@ -100,7 +105,11 @@
             }
             reader.readAsDataURL(this.files[0]);
             $("#modal_upload_image").modal('show');
+            // $("#modal_upload_image").on('hidden.bs.modal', function() {
+            //     $image_crop.croppie('destroy');
+            // });
         });
+
 
         $(".crop_upload").click(function(event) {
             $image_crop.croppie('result', {
