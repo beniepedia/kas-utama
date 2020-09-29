@@ -1,6 +1,8 @@
 $(document).ready(function () {
   let Form = $("#form-register");
 
+  console.log(Form.children().eq(0).val("234234"));
+
   Form.validate({
     rules: {
       nama: {
@@ -80,22 +82,22 @@ $(document).ready(function () {
           $("button[type=submit]").prop("disabled", true);
         },
         success: function (respon) {
-          if (respon.status == 'success') {
+          if (respon.status == "success") {
             Swal.fire({
-              icon: 'success',
-              title: 'Registrasi berhasil!',
+              icon: "success",
+              title: "Registrasi berhasil!",
               html: respon.msg,
               showConfirmButton: true,
             }).then((result) => {
               if (result.value) {
-                location.href = '/login';
+                location.href = "/login";
               }
             });
           } else {
-            Form.trigger('reset');
+            Form.trigger("reset");
             Swal.fire({
-              icon: 'error',
-              title: 'Registrasi Gagal!',
+              icon: "error",
+              title: "Registrasi Gagal!",
               text: respon.msg,
               showConfirmButton: true,
             });
@@ -105,7 +107,7 @@ $(document).ready(function () {
           $("button[type=submit]").html("Register");
           $("button[type=submit]").prop("disabled", false);
         },
-        error: function () { },
+        error: function () {},
       });
     },
   });

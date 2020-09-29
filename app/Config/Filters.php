@@ -35,7 +35,7 @@ class Filters extends BaseConfig
 				'profile/password_cek',
 				'profile/ganti_photo',
 
-				'auth/login_proses',
+				// 'auth/logins',
 				'auth/register_proses',
 				'auth/remove_attempt',
 				'auth/email_cek',

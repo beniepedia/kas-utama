@@ -9,7 +9,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3><?= ($total_kas_umum['jumlah'] ? indo_currency($total_kas_umum['jumlah']) : 'Rp. 0') ?></h3>
+                        <h3 class="count"><?= ($total_kas_umum['jumlah'] ? indo_currency($total_kas_umum['jumlah']) : 'Rp. 0') ?></h3>
                         <p>Total KAS Masuk</p>
                     </div>
                     <div class="icon">
@@ -67,4 +67,5 @@
         </div>
 </section>
 <!-- /.content -->
+
 <?= $this->endSection() ?>

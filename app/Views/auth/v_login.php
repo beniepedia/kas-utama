@@ -1,6 +1,5 @@
 <?php echo $this->include('auth/header') ?>
 
-
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
@@ -10,12 +9,12 @@
         <div class="card">
             <div class="overlay" style="display: none;"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">silahkan masuk menggunakan email yang sudah terdaftar.</p>
                 <div class="notif"></div>
-                <form action="<?= base_url('auth/login_proses'); ?>" method="post" id="form-login">
-
+                <form action="<?= base_url('auth/login'); ?>" method="post" id="form-login">
+                    <?= csrf_field(); ?>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email" autofocus>
+                        <input type="email" class="form-control" name="email" placeholder="Masukan email" autofocus>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -23,7 +22,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" name="password" placeholder="Masukan kata sandi">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -41,12 +40,12 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-6 ">
-                            <button type="submit" class="btn btn-primary btn-sm btn-block"> <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-sm btn-block"> <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Masuk</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-                <!-- 
+
                 <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
                     <a href="#" class="btn btn-block btn-primary">
@@ -55,15 +54,14 @@
                     <a href="#" class="btn btn-block btn-danger">
                         <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                     </a>
-                </div> -->
+                </div>
                 <!-- /.social-auth-links -->
                 <hr>
-                <p class="mb-1">
-                    <a href="<?= base_url('auth/lupa-password') ?>"><small>Lupa password</small></a>
-                </p>
-                <p class="mb-0">
-                    <a href="<?= base_url('register') ?>" class="text-center"><small>Daftar akun baru</small></a>
-                </p>
+                <div class="col d-flex justify-content-between">
+                    <a href="<?= base_url('auth/lupa-password') ?>">Lupa password</a>
+                    <a href="<?= base_url('register') ?>" class="text-center ">Daftar akun baru</a>
+
+                </div>
             </div>
             <!-- /.login-card-body -->
         </div>

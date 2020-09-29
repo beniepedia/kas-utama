@@ -1,7 +1,7 @@
 function showAlert(type, messages) {
   return `<div class="alert alert-${type} alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <div class="text-center"><small>${messages}</small></div>
+            <div class="text-haredeung-center"><small>${messages}</small></div>
         </div>`;
 }
 
@@ -28,10 +28,10 @@ function countDown(date, messsage, id) {
       `<div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <div class="text-center"><small>${messsage}<br><b>` +
-      minutes +
-      ` menit ` +
-      seconds +
-      ` detik</b></small></div>
+        minutes +
+        ` menit ` +
+        seconds +
+        ` detik</b></small></div>
             </div>`
     );
     // Jika hitungan mundur selesai,
@@ -45,7 +45,7 @@ function countDown(date, messsage, id) {
 
 function remove_attempt(id) {
   const host = $("#form-login").attr("action");
-  const action = host.replace("login_proses", "remove_attempt");
+  const action = host.replace("login", "remove_attempt");
   $.ajax({
     url: action,
     method: "post",
@@ -166,13 +166,15 @@ $(document).ready(function () {
             break;
         }
       },
-      complete: function () {
+      complete: function (respon) {
+        $("input[name=csrf_test_name]").val(respon.responseJSON.token);
         $("button[type=submit]").html(
           '<i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Sign In'
         );
         $("button[type=submit]").prop("disabled", false);
       },
       error: function () {
+        form.trigger("reset");
         $(".notif").html(`<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <div class="text-center">Terjadi kesalahan pada sistem. Silahkan coba sesaat lagi.</div>

@@ -46,7 +46,7 @@ class AuthModel extends Model
                         if (password_verify($password, $user['password']) == 1) {
                             if ($user['status'] == 1) {
                                 // cek user aktif
-                                $this->_delete_attempt($user['id_pengguna']);
+                                $this->delete_attempt($user['id_pengguna']);
                                 $this->_delete_user_token($email);
                                 $setData = [
                                     'isLogged' => true,
@@ -64,7 +64,8 @@ class AuthModel extends Model
                         } else {
                             $this->_user_attempt($user['id_pengguna']);
                             $result['error'] = 2;
-                            $result['msg'] = 'Password yang anda masukan salah...';
+                            $result['msg'] = 'Kata sandi salah. silahkan coba lagi.';
+                            $result['token'] = csrf_hash();
                         }
                     } else {
                         $attempt_date = date('Y-m-d H:i:s', $user_attempt['result']['waktu'] + MINUTE * 1);
@@ -72,21 +73,24 @@ class AuthModel extends Model
                         $result['msg'] = 'Anda sudah melakukan 3 kali kesalahan. Silahkan coba kembali setelah';
                         $result['time'] = $attempt_date;
                         $result['userId'] = $user['id_pengguna'];
+                        $result['token'] = csrf_hash();
                     }
                 } else {
                     // cek user belum verifikasi
-                    $this->_delete_attempt($user['id_pengguna']);
+                    $this->delete_attempt($user['id_pengguna']);
                     $result['error'] = 5;
                     $result['msg'] = 'Email anda belum diverifikasi. Silahkan cek inbox emial anda untuk verifikasi email.';
                 }
             } else {
-                $this->_delete_attempt($user['id_pengguna']);
+                $this->delete_attempt($user['id_pengguna']);
                 $result['error'] = 4;
                 $result['msg'] = 'Akun anda diblokir. Hubungi admin untuk membuka akun anda.';
+                $result['token'] = csrf_hash();
             }
         } else {
             $result['error'] = 1;
             $result['msg'] = 'Email tidak ditemukan!. Silahkan coba lagi...';
+            $result['token'] = csrf_hash();
         }
 
         return $result;
@@ -173,7 +177,7 @@ class AuthModel extends Model
         $this->db->table('attempt')->insert($data);
     }
 
-    public function _delete_attempt($id)
+    public function delete_attempt($id)
     {
         $output['error'] = '';
         $output['msg'] = '';

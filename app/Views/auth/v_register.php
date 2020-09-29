@@ -10,7 +10,8 @@
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Daftar keanggotaan baru</p>
 
-                <form action="<?= base_url('auth/register_proses') ?>" method="post" id="form-register">
+                <form action="<?= base_url('auth/register') ?>" method="post" id="form-register">
+
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama">
                         <div class="input-group-append">
