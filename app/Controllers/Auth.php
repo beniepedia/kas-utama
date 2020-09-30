@@ -50,12 +50,12 @@ class Auth extends Controller
     public function register()
     {
 
-        // if (isset($_POST['email']) and isset($_POST['nama']) and isset($_POST['password'])) {
-        //     if ($this->request->isAJAX()) {
-        //         $register = $this->authModel->register();
-        //         return json_encode($register);
-        //     }
-        // }
+        if (isset($_POST['email']) and isset($_POST['nama']) and isset($_POST['password'])) {
+            if ($this->request->isAJAX()) {
+                $register = $this->authModel->register();
+                return json_encode($register);
+            }
+        }
 
         $data = [
             'db' => new \App\Models\settingModel()
@@ -63,31 +63,9 @@ class Auth extends Controller
         return view('auth/v_register', $data);
     }
 
-    // public function login_proses()
-    // {
-    //     if ($this->request->isAJAX()) {
-    //         $email = trim($this->request->getPost('email'));
-    //         $password = $this->request->getPost('password');
-    //         $result = $this->authModel->login($email, $password);
-    //         return json_encode($result);
-    //     } else {
-    //         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-    //     }
-    // }
-
-    public function register_proses()
-    {
-        if ($this->request->isAJAX()) {
-            $register = $this->authModel->register();
-            echo json_encode($register);
-        } else {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
-    }
-
     public function lupa_password()
     {
-        if (isset($_POST['email'])) {
+        if (isset($_POST['email']) and !empty($_POST['email'])) {
             if ($this->request->isAJAX()) {
                 $cek = $this->authModel->lupa_password();
                 return json_encode($cek);
@@ -123,6 +101,8 @@ class Auth extends Controller
                     $output['status'] = 'success';
                     $output['msg']    = 'Kata sandi berhasil di setel ulang. Silahkan login menggunakan kata sandi baru.';
                 }
+
+                $output['token'] = csrf_hash();
 
                 return json_encode($output);
             }

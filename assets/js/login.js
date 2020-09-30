@@ -28,10 +28,10 @@ function countDown(date, messsage, id) {
       `<div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <div class="text-center"><small>${messsage}<br><b>` +
-        minutes +
-        ` menit ` +
-        seconds +
-        ` detik</b></small></div>
+      minutes +
+      ` menit ` +
+      seconds +
+      ` detik</b></small></div>
             </div>`
     );
     // Jika hitungan mundur selesai,
@@ -167,7 +167,8 @@ $(document).ready(function () {
         }
       },
       complete: function (respon) {
-        $("input[name=csrf_test_name]").val(respon.responseJSON.token);
+        form.children().eq(0).val(respon.responseJSON.token);
+
         $("button[type=submit]").html(
           '<i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Sign In'
         );

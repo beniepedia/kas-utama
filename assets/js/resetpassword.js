@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let Form = $("#form-reset");
+    let Form = $("#form-lupa-password");
     Form.validate({
         rules: {
             email: {
@@ -47,7 +47,7 @@ $(document).ready(function () {
                         })
                     }
                     else if (respon.error === 1) {
-                        Form.trigger('reset');
+
                         $(".error").text(respon.msg);
 
                     }
@@ -60,7 +60,9 @@ $(document).ready(function () {
                         })
                     }
                 },
-                complete: function () {
+                complete: function (respon) {
+                    Form.trigger('reset');
+                    Form.children().eq(0).val(respon.responseJSON.token);
                     $("button[type=submit]").html('Reset password');
                     $("button[type=submit]").attr('disabled', false);
                 },
@@ -125,7 +127,10 @@ $(document).ready(function () {
 
                 $("button[type=submit]").attr('disabled', false);
                 $("button[type=submit]").html('Setel ulang kata sandi');
+            }).always((respon) => {
+                Form.children().eq(0).val(respon.token);
             }).fail((e) => {
+                Form.trigger('reset');
                 $("button[type=submit]").attr('disabled', false);
                 $("button[type=submit]").html('Setel ulang kata sandi');
                 $(".error").text("Maaf, Terjadi kesalahan pada sistem kami.");

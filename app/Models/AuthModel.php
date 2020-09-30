@@ -65,7 +65,6 @@ class AuthModel extends Model
                             $this->_user_attempt($user['id_pengguna']);
                             $result['error'] = 2;
                             $result['msg'] = 'Kata sandi salah. silahkan coba lagi.';
-                            $result['token'] = csrf_hash();
                         }
                     } else {
                         $attempt_date = date('Y-m-d H:i:s', $user_attempt['result']['waktu'] + MINUTE * 1);
@@ -73,7 +72,6 @@ class AuthModel extends Model
                         $result['msg'] = 'Anda sudah melakukan 3 kali kesalahan. Silahkan coba kembali setelah';
                         $result['time'] = $attempt_date;
                         $result['userId'] = $user['id_pengguna'];
-                        $result['token'] = csrf_hash();
                     }
                 } else {
                     // cek user belum verifikasi
@@ -85,14 +83,13 @@ class AuthModel extends Model
                 $this->delete_attempt($user['id_pengguna']);
                 $result['error'] = 4;
                 $result['msg'] = 'Akun anda diblokir. Hubungi admin untuk membuka akun anda.';
-                $result['token'] = csrf_hash();
             }
         } else {
             $result['error'] = 1;
             $result['msg'] = 'Email tidak ditemukan!. Silahkan coba lagi...';
-            $result['token'] = csrf_hash();
         }
 
+        $result['token'] = csrf_hash();
         return $result;
 
 
@@ -128,6 +125,8 @@ class AuthModel extends Model
             $output['msg'] = 'Terjadi kesalahan pada sistem kami. Ulangi beberapa saat lagi atau hubungi kami';
         }
 
+        $output['token'] = csrf_hash();
+
         return $output;
     }
 
@@ -142,7 +141,7 @@ class AuthModel extends Model
                 $this->_token_insert($email, $token);
                 sendEmail::system('lupaPassword', $userData->email, $userData->nama, $token);
                 $output['error'] = 0;
-                $output['msg']   = "Permitaan setel ulang kata sandi berhasil. Cek inbox email kamu untuk petunjuk setel ulang kata sandi";
+                $output['msg']   = "Permitaan setel ulang kata sandi berhasil. Petunjuk untuk setel ulang kata sandi sudah kami kirim ke <b>{$userData->email}</b>";
             } else {
                 $output['error'] = 2;
                 $output['msg']   = "Kamu sudah pernah melakukan permintaan setel ulang kata sandi sebelumnya. Silahkan cek kotak masuk email anda.";
@@ -151,6 +150,8 @@ class AuthModel extends Model
             $output['error'] = 1;
             $output['msg']   = "Email tidak terdaftar atau belum aktif. Pastikan email kamu sudah terdaftar atau terverifikasi";
         }
+
+        $output['token'] = csrf_hash();
 
         return $output;
     }

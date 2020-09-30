@@ -1,8 +1,6 @@
 $(document).ready(function () {
   let Form = $("#form-register");
 
-  console.log(Form.children().eq(0).val("234234"));
-
   Form.validate({
     rules: {
       nama: {
@@ -103,11 +101,18 @@ $(document).ready(function () {
             });
           }
         },
-        complete: function () {
+        complete: function (respon) {
+          Form.trigger("reset");
+          Form.children().eq(0).val(respon.responseJSON.token);
           $("button[type=submit]").html("Register");
           $("button[type=submit]").prop("disabled", false);
         },
-        error: function () {},
+        error: function () {
+          $(".error").html(`<div class="alert alert-danger text-center alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <small>Terjadi kesalah pada sistem kami. silahkan ulangi beberapa sat lagi.</small>
+      </div>`);
+        },
       });
     },
   });

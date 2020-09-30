@@ -25,7 +25,7 @@ function notif(type, title, pesan, buttonShow = false, timer = 3000) {
   return Swal.fire({
     icon: type,
     title: title,
-    text: pesan,
+    html: pesan,
     showConfirmButton: buttonShow,
     timer: timer,
   });

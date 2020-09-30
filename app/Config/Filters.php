@@ -35,12 +35,8 @@ class Filters extends BaseConfig
 				'profile/password_cek',
 				'profile/ganti_photo',
 
-				// 'auth/logins',
-				'auth/register_proses',
 				'auth/remove_attempt',
 				'auth/email_cek',
-				'auth/lupa_password',
-				'auth/reset_password',
 
 				'hak-akses/hapus',
 				'hak-akses/proses',
