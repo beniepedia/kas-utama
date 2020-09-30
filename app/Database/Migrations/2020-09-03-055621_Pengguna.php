@@ -17,6 +17,7 @@ class Pengguna extends Migration
 			'id_level_user' => [
 				'type' => 'INT',
 				'constraint' => 11,
+				'default' => 2,
 			],
 			'nama' => [
 				'type' => 'VARCHAR',
@@ -40,10 +41,13 @@ class Pengguna extends Migration
 			'kelamin' => [
 				'type' => 'ENUM',
 				'constraint' => ['L', 'P'],
+				'null' => true,
+				'default' => NULL
 			],
 			'photo' => [
 				'type' => 'VARCHAR',
 				'constraint' => 255,
+				'default' => 'default.png',
 			],
 			'alamat' => [
 				'type' => 'TEXT',
