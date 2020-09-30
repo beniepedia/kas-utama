@@ -196,4 +196,16 @@ class Anggota extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
+
+    public function ubah_status()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getPost('id');
+            $action = $this->request->getPost('action');
+            $update_status = $this->userModel->update($id, ['status' => $action]);
+            echo json_encode($update_status);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
 }

@@ -1,7 +1,7 @@
 function showAlert(type, messages) {
   return `<div class="alert alert-${type} alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <div class="text-haredeung-center"><small>${messages}</small></div>
+            <div class="text-center"><small>${messages}</small></div>
         </div>`;
 }
 

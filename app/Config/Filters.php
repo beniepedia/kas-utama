@@ -25,6 +25,7 @@ class Filters extends BaseConfig
 				'anggota/email_cek',
 				'anggota/save',
 				'anggota/detail',
+				'anggota/ubah_status',
 
 				'kas-umum/hapus',
 				'kas-umum/formModalUbah',
@@ -53,8 +54,6 @@ class Filters extends BaseConfig
 				'/register',
 				'/verifikasi/*',
 				'/reset-password',
-				'auth/login_proses',
-				'auth/register_proses',
 				'auth/remove_attempt',
 				'auth/email_cek',
 				'auth/lockscreen',

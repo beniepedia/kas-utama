@@ -32,7 +32,7 @@ $userBaru = count($userData);
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/icheck-bootstrap/icheck-bootstrap.css">
     <!-- pace-progress -->
     <!-- <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/pace-progress/themes/black/pace-theme-flat-top.css"> -->
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/pace-progress/themes/blue/pace-theme-loading-bar.css">
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/pace-progress/themes/blue/pace-theme-minimal.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">

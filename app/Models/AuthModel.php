@@ -82,7 +82,7 @@ class AuthModel extends Model
             } else {
                 $this->delete_attempt($user['id_pengguna']);
                 $result['error'] = 4;
-                $result['msg'] = 'Akun anda diblokir. Hubungi admin untuk membuka akun anda.';
+                $result['msg'] = 'Akun anda terblokir. Hubungi admin untuk mengaktifkan akun akan kembali!.';
             }
         } else {
             $result['error'] = 1;

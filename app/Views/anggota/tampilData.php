@@ -43,6 +43,7 @@
                             <!-- <input type="checkbox" class="selectId"> -->
                         </td>
                         <td><?= $no++ ?></td>
+
                         <td><?= $u['nama'] ?></td>
                         <td>
                             <a href="javascript:void(0)" class="detail" id="<?= $u['id_pengguna']; ?>" style="text-decoration: underline;" data-toggle="tooltip" data-placement="auto" title="Lihat detail anggota"> <?= $u['email'] ?></a>
@@ -52,23 +53,23 @@
                             <?php
                             if ($u['status'] == 0) {
                                 $color = 'secondary';
-                                $text = 'Unverified';
+                                $text = 'Non Aktif';
+                                $action = 1;
+                                $tooltip = "Aktifkan akun {$u['nama']}";
                             } elseif ($u['status'] == 1) {
                                 $color = 'success';
-                                $text = 'Verified';
+                                $text = 'Aktif';
+                                $action = 2;
+                                $tooltip = "Block akun {$u['nama']}";
                             } elseif ($u['status'] == 2) {
                                 $color = 'danger';
-                                $text = 'Blocked';
+                                $text = 'Diblock';
+                                $action = 1;
+                                $tooltip = "Aktifkan akun {$u['nama']}";
                             }
                             ?>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-<?= $color ?>  btn-xs"><?= $text ?></button>
-                                <button type="button" class="btn btn-<?= $color ?> btn-xs dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                    <div class="dropdown-menu" role="menu" style="z-index: 99999;">
-                                        <a class="dropdown-item" href="#">Block</a>
-                                    </div>
-                                </button>
+                                <button type="button" id="<?= $u['id_pengguna'] ?>" action="<?= $action; ?>" data-toggle="toottip" data-placement="auto" title="<?= $tooltip; ?>" nama="<?= $u['nama'] ?>" class="btn btn-<?= $color ?>  btn-xs ubah-status"><?= $text ?></button>
                             </div>
 
                         </td>
@@ -139,7 +140,7 @@
 
         });
 
-        $(".detail").click(function(e) {
+        $("body").on("click", ".detail", function(e) {
             e.preventDefault();
             let id = $(this).attr('id');
 
@@ -150,7 +151,44 @@
                 $("#modal_detail_anggota").modal('show');
             })
 
-        })
+        });
+
+        $("body").on("click", ".ubah-status", function() {
+
+            let id = $(this).attr('id');
+            let nama = $(this).attr('nama');
+            let action = $(this).attr('action');
+            let notif = '';
+            let button = '';
+
+            if (action == 1) {
+                notif = `Aktifkan user <b>${nama}</b> ?`;
+                button = `Ya, aktifkan!`;
+            } else if (action == 2) {
+                notif = `Blokir user <b>${nama}</b> ?`;
+                button = `Ya, block!`;
+            }
+
+            let data = {
+                id: id,
+                action: action,
+            };
+
+            let confirm = confirmAlert('', notif, button);
+            confirm.then((result) => {
+                if (result.value) {
+                    ajxPost('<?= site_url(service('uri')->getSegment(1, 0)) . '/ubah_status' ?>', data).done((respon) => {
+                        if (respon == true) {
+                            loadData();
+                        } else {
+                            mini_notif('error', 'Terjadi kesalahan pada sistem');
+                        }
+                    }).fail(() => {
+                        mini_notif('error', 'Terjadi kesalahan pada sistem');
+                    });
+                }
+            });
+        });
 
         $(".hapus-semua").click(function() {
             var id = $(".selected:checked").map(function() {

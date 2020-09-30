@@ -88,6 +88,7 @@
                 width: 400,
                 height: 400,
             },
+            enableResize: true,
             mouseWheelZoom: 'ctrl',
             showZoomer: true
         });
@@ -105,9 +106,6 @@
             }
             reader.readAsDataURL(this.files[0]);
             $("#modal_upload_image").modal('show');
-            // $("#modal_upload_image").on('hidden.bs.modal', function() {
-            //     $image_crop.croppie('destroy');
-            // });
         });
 
 
@@ -126,8 +124,6 @@
                     gambarLama: $("input[name=imageLama]").val(),
                 };
                 ajxPost(url, data).done((data) => {
-                    // $(".widget-user-image").attr('href', data.link);
-                    // $(".widget-user-image").html(data.img_link);
                     loadData();
                     $(".sidebar .user-panel .image").html(data.img_link);
                     $("#modal_upload_image").modal('hide');

@@ -57,7 +57,7 @@ $uri = service('uri'); ?>
             <li class="nav-header">Extra
             </li>
             <li class="nav-item">
-                <a href="<?= site_url('auth/keluar') ?>" class="nav-link">
+                <a href="<?= site_url('auth/keluar') ?>" class="nav-link keluar">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Keluar</p>
                 </a>
@@ -73,3 +73,18 @@ $uri = service('uri'); ?>
 
     <!-- /.sidebar-menu -->
 </div>
+
+<script>
+    $(document).ready(function() {
+        $(".keluar").click(function(e) {
+            e.preventDefault();
+            let href = $(this).attr('href');
+            let notif = confirmAlert('', 'Apakah anda yakin ingin keluar aplikasi?', 'YA');
+            notif.then((result) => {
+                if (result.value) {
+                    location.href = href;
+                }
+            });
+        })
+    });
+</script>
