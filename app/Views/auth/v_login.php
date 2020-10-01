@@ -32,7 +32,7 @@
                     <div class="row mt-4">
                         <div class="col-6">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" id="remember" name="remember">
                                 <label for="remember">
                                     Ingat saya
                                 </label>

@@ -14,13 +14,14 @@ class Filters extends BaseConfig
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'auth' => \App\Filters\AuthFilter::class,
 		'noauth' => \App\Filters\NoAuthFilter::class,
-		'permission' => \App\Filters\PermissionFilter::class,
+		'cookie' => \App\Filters\cookieFilter::class,
 	];
 
 	// Always applied before every request
 	public $globals = [
 		'before' => [
 			//'honeypot'
+
 			'csrf' => ['except' => [
 				'anggota/email_cek',
 				'anggota/save',

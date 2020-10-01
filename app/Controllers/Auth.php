@@ -22,7 +22,7 @@ class Auth extends Controller
 
     public function __construct()
     {
-        helper('text');
+        helper(['text', 'fungsi', 'cookie']);
         $this->authModel = new AuthModel();
         $this->sendEmail = new SendEmail();
     }
@@ -30,15 +30,22 @@ class Auth extends Controller
 
     public function login()
     {
-
         if (isset($_POST['email']) and isset($_POST['password'])) {
             if ($this->request->isAJAX()) {
                 $email = trim($this->request->getPost('email'));
                 $password = $this->request->getPost('password');
                 $result = $this->authModel->login($email, $password);
+
+                if ($this->request->getVar('remember')) {
+                    if ($result['error'] == 0) {
+                        $this->response->setCookie('key_id', session()->get('userId'), HOUR);
+                        $this->response->setCookie('key_token', hash_id(session()->get('userEmail')), HOUR);
+                    }
+                }
                 return json_encode($result);
             }
         }
+
 
         $data = [
             'db' => new \App\Models\settingModel()
@@ -174,6 +181,11 @@ class Auth extends Controller
     public function keluar()
     {
         session()->destroy();
+
+        if (isset($_COOKIE['key_id']) or isset($_COOKIE['key_token'])) {
+        }
+        // setcookie('key_id', '', time() - 3600);
+        // setcookie('key_token', '', time() - 3600);
         return redirect()->to('/login');
     }
 

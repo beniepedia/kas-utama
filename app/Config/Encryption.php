@@ -22,7 +22,9 @@ class Encryption extends BaseConfig
 	  | See the user guide for more info.
 	 */
 
-	public $key = 'AhmadQomaini';
+	// public $key = 'aBigsecret_ofAtleast32Characters';
+	// sha256
+	public $key = 'd671c8bd71a866849ba8d023d33400db0543ed908b740df09faf7d40604b5329';
 
 	/*
 	  |--------------------------------------------------------------------------

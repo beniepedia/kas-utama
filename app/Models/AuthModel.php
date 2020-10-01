@@ -26,16 +26,16 @@ class AuthModel extends Model
     {
 
         $this->db       = db_connect();
-        $this->user     = $this->db->table('pengguna');
         $this->attempt  = $this->db->table('attempt');
         $this->request  = service('request');
     }
 
     public function login($email, $password)
     {
-        $this->user->where('email', $email);
-        $query = $this->user->join('level_user', 'level_user.id_level_user=pengguna.id_level_user')->get();
-        $user = $query->getRowArray();
+
+        $this->where('email', $email);
+        $user = $this->join('level_user', 'level_user.id_level_user=pengguna.id_level_user')
+            ->get()->getRowArray();
 
         if ($user) {
             $user_attempt = $this->_cek_login_attempt($user['id_pengguna']);
@@ -48,6 +48,7 @@ class AuthModel extends Model
                                 // cek user aktif
                                 $this->delete_attempt($user['id_pengguna']);
                                 $this->_delete_user_token($email);
+
                                 $setData = [
                                     'isLogged' => true,
                                     'userId' => $user['id_pengguna'],
@@ -56,6 +57,7 @@ class AuthModel extends Model
                                     'userEmail' => $user['email'],
                                     'userNama' => $user['nama'],
                                 ];
+
                                 session()->set($setData);
                                 $result['error'] = 0;
                                 $result['nama'] = $user['nama'];
@@ -188,15 +190,13 @@ class AuthModel extends Model
             $output['error'] = 1;
             $output['msg'] = 'Silahkan login kembali...';
         }
-        // $result = $query->affectedRows();
-        // $output['error'] = $result;
-        // $output['msg'] = 'Silahkan login kembali...';
+
         return $output;
     }
 
     public function cek_email($mail)
     {
-        return $this->user->where('email', $mail)->get()->getRowArray();
+        return $this->where('email', $mail)->get()->getRowArray();
     }
 
     private function _token_insert($email, $token)
