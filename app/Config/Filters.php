@@ -31,7 +31,6 @@ class Filters extends BaseConfig
 				'kas-umum/hapus',
 				'kas-umum/formModalUbah',
 
-				'kategori/proses',
 				'kategori/hapus',
 
 				'profile/password_cek',

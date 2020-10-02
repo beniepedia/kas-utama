@@ -44,14 +44,22 @@ class Kategori extends BaseController
                 $this->db->save([
                     'nama_kategori' => esc(trim($this->request->getPost('kategori')))
                 ]);
-                echo json_encode(['proses' => 'simpan', 'status' => $this->db->affectedRows()]);
+
+                $output['proses'] = 'simpan';
+                $output['status'] = $this->db->affectedRows();
+                // echo json_encode(['proses' => 'simpan', 'status' => $this->db->affectedRows()]);
             } else {
                 $this->db->save([
                     'id_kategori' => $this->request->getPost('idkategori'),
                     'nama_kategori' => esc(trim($this->request->getPost('kategori')))
                 ]);
-                echo json_encode(['proses' => 'update', 'status' => $this->db->affectedRows()]);
+                $output['proses'] = 'update';
+                $output['status'] = $this->db->affectedRows();
+                // echo json_encode(['proses' => 'update', 'status' => $this->db->affectedRows()]);
             }
+
+            $output['token'] = csrf_hash();
+            echo json_encode($output);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }

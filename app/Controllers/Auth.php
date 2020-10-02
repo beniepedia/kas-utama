@@ -38,8 +38,8 @@ class Auth extends Controller
 
                 if ($this->request->getVar('remember')) {
                     if ($result['error'] == 0) {
-                        $this->response->setCookie('key_id', session()->get('userId'), HOUR);
-                        $this->response->setCookie('key_token', hash_id(session()->get('userEmail')), HOUR);
+                        $this->response->setCookie('key_id', session()->get('userId'), MINUTE);
+                        $this->response->setCookie('key_token', hash_id(session()->get('userEmail')), MINUTE);
                     }
                 }
                 return json_encode($result);
@@ -183,9 +183,9 @@ class Auth extends Controller
         session()->destroy();
 
         if (isset($_COOKIE['key_id']) or isset($_COOKIE['key_token'])) {
+            setcookie('key_id', '', time() - 3600, '/');
+            setcookie('key_token', '', time() - 3600, '/');
         }
-        // setcookie('key_id', '', time() - 3600);
-        // setcookie('key_token', '', time() - 3600);
         return redirect()->to('/login');
     }
 

@@ -16,6 +16,7 @@ class cookieFilter implements FilterInterface
 
 
         if (isset($_COOKIE['key_id']) and isset($_COOKIE['key_token'])) {
+
             helper(['cookie', 'fungsi']);
             $userModel  = new penggunaModel();
             $id         = get_cookie('key_id');
@@ -36,6 +37,8 @@ class cookieFilter implements FilterInterface
                     'userNama' => $userData->nama,
                 ]);
             }
+
+            return redirect()->to('dashboard');
         }
 
 
