@@ -83,6 +83,8 @@
 
     $("body").on("click", ".edit", function(e) {
         e.preventDefault();
+        $(".tambah").hide();
+        $(".tambah-banyak").hide();
         let id = $(this).attr('id');
         ajxPost('<?= site_url(service('uri')->getSegment(1, 0) . '/edit'); ?>', {
             id: id

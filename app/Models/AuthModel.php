@@ -190,7 +190,7 @@ class AuthModel extends Model
             $output['error'] = 1;
             $output['msg'] = 'Silahkan login kembali...';
         }
-
+        $output['token'] = csrf_hash();
         return $output;
     }
 

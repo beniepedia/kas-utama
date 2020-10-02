@@ -12,7 +12,6 @@
 
             </div>
             <form action="<?= site_url('auth/reset_password') ?>" id="reset-password" method="post">
-                <?= csrf_field(); ?>
                 <input type="hidden" name="id" value="<?= $id; ?>">
                 <div class="input-group">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Masukan kata sandi baru">

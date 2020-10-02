@@ -45,31 +45,28 @@ function countDown(date, messsage, id) {
 
 function remove_attempt(id) {
   const host = $("#form-login").attr("action");
-  const action = host.replace("login", "remove_attempt");
-  $.ajax({
-    url: action,
-    method: "post",
-    dataType: "json",
-    data: { id: id },
-    beforeSend: function () {
-      $(".notif").html(`<div class="alert alert-info alert-dismissible">
+  const url = host.replace("login", "remove_attempt");
+  const before = [
+    $(".notif").html(`<div class="alert alert-info alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <div class="text-center"><i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Silahkan tunggu...</div>
-            </div>`);
-    },
-    success: function (respon) {
-      if (respon.error == 1) {
-        localStorage.removeItem("attempt");
-        $(".notif").html(`<div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <div class="text-center">${respon.msg}</div>
-                </div>`);
-        $("#form-login :input").prop("disabled", false);
-      } else {
-        $(".notif").html("");
-      }
-    },
+            </div>`)
+  ];
+  ajxPost(url, { id: id }).done((respon) => {
+    if (respon.error == 1) {
+      localStorage.removeItem("attempt");
+      $(".notif").html(`<div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <div class="text-center">${respon.msg}</div>
+              </div>`);
+      $("#form-login :input").prop("disabled", false);
+    } else {
+      $(".notif").html("");
+    }
+  }).fail((e) => {
+    alert(e.responseText);
   });
+
 }
 
 function cek_attempt() {
@@ -120,67 +117,59 @@ $(document).ready(function () {
 
   function login() {
     const form = $("#form-login");
-    $.ajax({
-      url: form.attr("action"),
-      dataType: "JSON",
-      method: "POST",
-      data: form.serialize(),
-      beforeSend: function () {
-        $("button[type=submit]").html('<i class="fas fa-spinner fa-spin"></i>');
-        $("button[type=submit]").prop("disabled", true);
-      },
-      success: function (respon) {
-        switch (respon.error) {
-          case 0:
-            $(".overlay").show();
-            Swal.fire({
-              title: "Login sukses!",
-              html: `Hi, <b>${respon.nama}</b>. Kamu berhasil login...!!!`,
-              timer: 3000,
-              timerProgressBar: true,
-              icon: "success",
-            }).then((result) => {
-              window.location = respon.link;
-            });
-            break;
-          case 1:
-            $(".notif").html(showAlert("danger", respon.msg));
-            form.trigger("reset");
-            break;
-          case 2:
-            $(".notif").html(showAlert("danger", respon.msg));
-            $("input[name=password]").val("");
-            break;
-          case 3:
-            form.trigger("reset");
-            localStorage.setItem("attempt", JSON.stringify(respon));
-            location.reload();
-            break;
-          case 4:
-            $(".notif").html(showAlert("danger", respon.msg));
-            form.trigger("reset");
-            break;
-          case 5:
-            $(".notif").html(showAlert("danger", respon.msg));
-            form.trigger("reset");
-            break;
-        }
-      },
-      complete: function (respon) {
-        form.children().eq(0).val(respon.responseJSON.token);
 
-        $("button[type=submit]").html(
-          '<i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Sign In'
-        );
-        $("button[type=submit]").prop("disabled", false);
-      },
-      error: function () {
-        form.trigger("reset");
-        $(".notif").html(`<div class="alert alert-danger alert-dismissible">
+    const before = [
+      $("button[type=submit]").prop("disabled", true),
+      $("button[type=submit]").html('<i class="fas fa-spinner fa-spin"></i>'),
+    ];
+
+    ajxPost(form.attr("action"), form.serialize()).done((respon) => {
+      $("button[type=submit]").html(
+        '<i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Masuk'
+      );
+      $("button[type=submit]").prop("disabled", false);
+      switch (respon.error) {
+        case 0:
+          $(".overlay").show();
+          Swal.fire({
+            title: "Login sukses!",
+            html: `Hi, <b>${respon.nama}</b>. Kamu berhasil login...!!!`,
+            timer: 3000,
+            timerProgressBar: true,
+            icon: "success",
+          }).then((result) => {
+            window.location = respon.link;
+          });
+          break;
+        case 1:
+          $(".notif").html(showAlert("danger", respon.msg));
+          form.trigger("reset");
+          break;
+        case 2:
+          $(".notif").html(showAlert("danger", respon.msg));
+          $("input[name=password]").val("");
+          break;
+        case 3:
+          form.trigger("reset");
+          localStorage.setItem("attempt", JSON.stringify(respon));
+          location.reload();
+          break;
+        case 4:
+          $(".notif").html(showAlert("danger", respon.msg));
+          form.trigger("reset");
+          break;
+        case 5:
+          $(".notif").html(showAlert("danger", respon.msg));
+          form.trigger("reset");
+          break;
+      }
+    }).fail((e) => {
+      alert(e.responseText);
+      form.trigger("reset");
+      $(".notif").html(`<div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <div class="text-center">Terjadi kesalahan pada sistem. Silahkan coba sesaat lagi.</div>
+                <div class="text-center"><small>Terjadi kesalahan pada sistem. Silahkan coba sesaat lagi</small>.</div>
                 </div>`);
-      },
     });
   }
 });

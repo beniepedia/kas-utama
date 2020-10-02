@@ -27,49 +27,39 @@ $(document).ready(function () {
             $(element).removeClass("is-invalid");
         },
         submitHandler: function () {
-            $.ajax({
-                url: Form.attr('action'),
-                method: 'post',
-                dataType: 'json',
-                data: Form.serialize(),
-                beforeSend: function () {
-                    $("button[type=submit]").html('<i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Silahkan tunggu');
-                    $("button[type=submit]").attr('disabled', true);
-                },
-                success: function (respon) {
+            const before = [
+                $("button[type=submit]").html('<i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Silahkan tunggu'),
+                $("button[type=submit]").attr('disabled', true)
+            ];
+            ajxPost(Form.attr('action'), Form.serialize()).done((respon) => {
+                if (respon.error === 0) {
+                    var notify = notif('success', 'Berhasil!', respon.msg, true, false);
+                    notify.then((result) => {
+                        if (result.value) {
+                            location.href = '/login';
+                        }
+                    })
+                }
+                else if (respon.error === 1) {
 
-                    if (respon.error === 0) {
-                        var notify = notif('success', 'Berhasil!', respon.msg, true, false);
-                        notify.then((result) => {
-                            if (result.value) {
-                                location.href = '/login';
-                            }
-                        })
-                    }
-                    else if (respon.error === 1) {
+                    $(".error").text(respon.msg);
 
-                        $(".error").text(respon.msg);
-
-                    }
-                    else if (respon.error === 2) {
-                        var notify = notif('error', 'Opps. Error!', respon.msg, true, false);
-                        notify.then((result) => {
-                            if (result.value) {
-                                location.href = '/login';
-                            }
-                        })
-                    }
-                },
-                complete: function (respon) {
-                    Form.trigger('reset');
-                    Form.children().eq(0).val(respon.responseJSON.token);
-                    $("button[type=submit]").html('Reset password');
-                    $("button[type=submit]").attr('disabled', false);
-                },
-                error: function () {
-                    $(".error").text('Maaf, terjadi kesalahan pada sistem.');
-                },
-            })
+                }
+                else if (respon.error === 2) {
+                    var notify = notif('error', 'Opps. Error!', respon.msg, true, false);
+                    notify.then((result) => {
+                        if (result.value) {
+                            location.href = '/login';
+                        }
+                    })
+                }
+                $("button[type=submit]").html('Reset password');
+                $("button[type=submit]").attr('disabled', false);
+            }).fail((e) => {
+                $(".error").text('Maaf, terjadi kesalahan pada sistem.');
+                $("button[type=submit]").html('Reset password');
+                $("button[type=submit]").attr('disabled', false);
+            });
         }
     });
 });
@@ -127,8 +117,6 @@ $(document).ready(function () {
 
                 $("button[type=submit]").attr('disabled', false);
                 $("button[type=submit]").html('Setel ulang kata sandi');
-            }).always((respon) => {
-                Form.children().eq(0).val(respon.token);
             }).fail((e) => {
                 Form.trigger('reset');
                 $("button[type=submit]").attr('disabled', false);

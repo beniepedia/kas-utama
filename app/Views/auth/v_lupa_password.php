@@ -14,7 +14,6 @@
                 </small>
             </div>
             <form action="<?= site_url('auth/lupa_password') ?>" id="form-lupa-password" method="post">
-                <?= csrf_field(); ?>
                 <div class="input-group">
                     <input type="text" class="form-control" name="email" placeholder="Masukan email kamu">
                 </div>

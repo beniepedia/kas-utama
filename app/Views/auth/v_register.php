@@ -13,7 +13,6 @@
                 <p class="login-box-msg">Daftar keanggotaan baru</p>
 
                 <form action="<?= base_url('auth/register') ?>" method="post" id="form-register">
-                    <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Nama Lengkap" name="nama">
                         <div class="input-group-append">

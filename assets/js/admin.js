@@ -1,4 +1,9 @@
 function ajxPost(url, data, before = null) {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name=X-CSRF-TOKEN]').attr('content')
+    }
+  });
   return $.ajax({
     url: url,
     dataType: "json",
@@ -7,6 +12,9 @@ function ajxPost(url, data, before = null) {
     beforeSend: function () {
       before;
     },
+    complete: function (data) {
+      $('meta[name=X-CSRF-TOKEN]').attr('content', data.responseJSON.token);
+    }
   });
 }
 

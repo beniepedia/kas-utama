@@ -28,7 +28,7 @@ switch (count($uri)) {
     <title><?= strtoupper($db->setting()->nama_app); ?> | <?= str_replace('-', ' ', ucfirst($url)) ?> </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <?= csrf_meta(); ?>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url('assets'); ?>/plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->

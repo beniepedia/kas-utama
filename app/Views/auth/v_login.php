@@ -12,7 +12,6 @@
                 <p class="login-box-msg">silahkan masuk menggunakan email yang sudah terdaftar.</p>
                 <div class="notif"></div>
                 <form action="<?= base_url('auth/login'); ?>" method="post" id="form-login">
-                    <?= csrf_field(); ?>
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" name="email" placeholder="Masukan email" autofocus>
                         <div class="input-group-append">
