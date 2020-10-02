@@ -14,7 +14,6 @@
 
             <div class="card-body">
                 <form class="form-horizontal" method="post" action="<?= base_url('anggota/save') ?>" id="form-anggota">
-                    <?= csrf_field() ?>
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="nama" class="col-sm-3 col-form-label">Nama</label>
@@ -122,7 +121,7 @@
                 const action = Form.attr('action');
                 const data = Form.serialize();
                 ajxPost(action, data).done((respon) => {
-                    if (respon == 1) {
+                    if (respon.status == 1) {
                         mini_notif('success', 'Anggota berhasil ditambah!');
                         $("button.save").html('<i class="fas fa-save"></i>&nbsp;&nbsp;Tambah');
                         $("button.save").prop('disabled', false);

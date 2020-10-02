@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Permision;
 use App\Models\penggunaModel;
+use App\Models\levelUserModel;
 
 use \Ramsey\Uuid\Uuid;
 
@@ -15,6 +17,7 @@ class Anggota extends BaseController
     public function __construct()
     {
         $this->userModel = new penggunaModel();
+        $this->userLevel = new levelUserModel();
     }
 
 
@@ -138,7 +141,9 @@ class Anggota extends BaseController
                 'status' => $status,
             ];
             $this->userModel->insert($data);
-            echo json_encode($this->userModel->affectedRows());
+            $ouput['status'] = $this->userModel->affectedRows();
+            $ouput['token'] = csrf_hash();
+            echo json_encode($ouput);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -162,7 +167,7 @@ class Anggota extends BaseController
                 $ouput['type'] = "error";
                 $ouput['title'] = "Gagal!";
             }
-
+            $ouput['token'] = csrf_hash();
             echo json_encode($ouput);
         }
     }
@@ -189,9 +194,10 @@ class Anggota extends BaseController
             $data = [
                 'user' => $this->userModel->asObject()->find($id)
             ];
-            $view = view('anggota/v_detail', $data);
+            $output['view'] = view('anggota/v_detail', $data);
+            $output['token'] = csrf_hash();
 
-            echo json_encode($view);
+            echo json_encode($output);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -200,10 +206,16 @@ class Anggota extends BaseController
     public function ubah_status()
     {
         if ($this->request->isAJAX()) {
+            // if (Permision::cek_akses()->edit != 1) {
+            //     return false;
+            // }
+
             $id = $this->request->getPost('id');
             $action = $this->request->getPost('action');
-            $update_status = $this->userModel->update($id, ['status' => $action]);
-            echo json_encode($update_status);
+
+            $output['status'] = $this->userModel->update($id, ['status' => $action]);
+            $output['token'] = csrf_hash();
+            echo json_encode($output);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -212,8 +224,12 @@ class Anggota extends BaseController
     public function edit()
     {
         if ($this->request->isAJAX()) {
-            $view = view('anggota/edit');
+            $data = [
+                'user' => $this->userModel->asObject()->find($this->request->getVar('id')),
+                'role' => $this->userLevel->asObject()->findAll(),
+            ];
 
+            $view = view('anggota/edit', $data);
             echo json_encode($view);
         }
     }

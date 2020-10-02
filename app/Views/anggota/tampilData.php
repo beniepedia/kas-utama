@@ -75,7 +75,7 @@
                         </td>
                         <td><?= $u['nama_level'] ?></td>
                         <td class="text-center">
-                            <a href="javascript:void(0)" class="text-warning edit" id="<?= $u['id_pengguna'] ?>" data-toggle="tooltip" data-placement="top" title="Edit data kategori"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                            <a href="javascript:void(0)" class="text-warning edit" id="<?= $u['id_pengguna'] ?>" data-toggle="tooltip" data-placement="top" title="Edit data anggota"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
                             <a href="javascript:void(0)" class="text-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus anggota" data-id="<?= $u['id_pengguna'] ?>" data-name="<?= $u['nama'] ?>"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
@@ -147,9 +147,11 @@
             ajxPost('<?= service('uri')->getSegment(1) . '/detail' ?>', {
                 id: id
             }).done((data) => {
-                $("#modal_detail_anggota .modal-body").html(data);
+                $("#modal_detail_anggota .modal-body").html(data.view);
                 $("#modal_detail_anggota").modal('show');
-            })
+            }).fail((e) => {
+                alert(e.responseText);
+            });
 
         });
 
@@ -178,7 +180,7 @@
             confirm.then((result) => {
                 if (result.value) {
                     ajxPost('<?= site_url(service('uri')->getSegment(1, 0)) . '/ubah_status' ?>', data).done((respon) => {
-                        if (respon == true) {
+                        if (respon.status == true) {
                             loadData();
                         } else {
                             mini_notif('error', 'Terjadi kesalahan pada sistem');

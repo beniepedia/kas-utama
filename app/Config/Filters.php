@@ -24,9 +24,6 @@ class Filters extends BaseConfig
 
 			'csrf' => ['except' => [
 				'anggota/email_cek',
-				'anggota/save',
-				'anggota/detail',
-				'anggota/ubah_status',
 				'anggota/edit',
 
 				'kas-umum/hapus',
