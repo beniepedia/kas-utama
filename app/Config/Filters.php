@@ -27,6 +27,7 @@ class Filters extends BaseConfig
 				'anggota/save',
 				'anggota/detail',
 				'anggota/ubah_status',
+				'anggota/edit',
 
 				'kas-umum/hapus',
 				'kas-umum/formModalUbah',

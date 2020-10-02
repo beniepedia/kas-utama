@@ -208,4 +208,13 @@ class Anggota extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
+
+    public function edit()
+    {
+        if ($this->request->isAJAX()) {
+            $view = view('anggota/edit');
+
+            echo json_encode($view);
+        }
+    }
 }

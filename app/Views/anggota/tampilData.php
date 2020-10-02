@@ -75,8 +75,8 @@
                         </td>
                         <td><?= $u['nama_level'] ?></td>
                         <td class="text-center">
-                            <a href="javascript:void(0)" class="text-warning edit" data-id="<?= $u['id_pengguna'] ?>" data-name="<?= $u['nama'] ?>" data-toggle="tooltip" data-placement="top" title="Ubah kategori"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                            <a href="javascript:void(0)" class="text-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus kategori" data-id="<?= $u['id_pengguna'] ?>" data-name="<?= $u['nama'] ?>"><i class="fas fa-trash-alt"></i></a>
+                            <a href="javascript:void(0)" class="text-warning edit" id="<?= $u['id_pengguna'] ?>" data-toggle="tooltip" data-placement="top" title="Edit data kategori"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                            <a href="javascript:void(0)" class="text-danger delete" data-toggle="tooltip" data-placement="top" title="Hapus anggota" data-id="<?= $u['id_pengguna'] ?>" data-name="<?= $u['nama'] ?>"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 <?php $row++;
@@ -189,6 +189,7 @@
                 }
             });
         });
+
 
         $(".hapus-semua").click(function() {
             var id = $(".selected:checked").map(function() {

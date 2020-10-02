@@ -80,5 +80,17 @@
             });
         });
     });
+
+    $("body").on("click", ".edit", function(e) {
+        e.preventDefault();
+        let id = $(this).attr('id');
+        ajxPost('<?= site_url(service('uri')->getSegment(1, 0) . '/edit'); ?>', {
+            id: id
+        }).done((respon) => {
+            $(".tampilAnggota").html(respon);
+        }).fail((e) => {
+            alert(e.responseText);
+        })
+    });
 </script>
 <?= $this->endSection() ?>
