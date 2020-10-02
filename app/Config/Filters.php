@@ -37,7 +37,6 @@ class Filters extends BaseConfig
 				'profile/password_cek',
 				'profile/ganti_photo',
 
-				// 'auth/remove_attempt',
 				'auth/email_cek',
 
 				'hak-akses/hapus',
