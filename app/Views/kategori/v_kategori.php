@@ -24,7 +24,6 @@
                     </div>
                     <div class="card-body">
                         <form action="/kategori/proses" method="post" id="form-add">
-                            <?= csrf_field(); ?>
                             <input type="hidden" name="idkategori" id="idkategori">
                             <div class="form-group">
                                 <label for="kategori">Nama Kategori</label>
@@ -103,7 +102,6 @@
                 ];
                 const data = $("#form-add").serialize()
                 ajxPost(Form.attr('action'), data, before).done((response) => {
-                    Form.children().eq(0).val(response.token);
                     if (response.proses === 'simpan') {
                         if (response.status > 0) {
                             notif('success', 'Sukses!', 'Data berhasil ditambah!', true);

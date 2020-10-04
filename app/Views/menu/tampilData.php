@@ -3,13 +3,21 @@
 
 
 <script>
-    $(document).on('click', '.edit-menu', function() {
-        let id = $(this).attr('id-menu');
-        ajxPost('<?= base_url(service('uri')->getSegment(1) . '/modal_edit'); ?>', {
-            id: id
-        }).done((respon) => {
-            $(".modal_edit").html(respon).show();
-            $("#form-edit").modal('show');
-        })
-    })
+    $(document).ready(function() {
+        $("body").on('click', '.edit-menu', function() {
+            let id = $(this).attr('id-menu');
+            ajxPost('<?= base_url(service('uri')->getSegment(1) . '/modal_edit'); ?>', {
+                id: id
+            }).done((respon) => {
+                $(".modal_edit").html(respon.view).show();
+                $("#form-edit").modal('show');
+            })
+        });
+
+
+        $("body").on('click', ".lock-menu", function() {
+            alert('oke');
+        });
+
+    });
 </script>

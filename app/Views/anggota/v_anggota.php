@@ -89,7 +89,7 @@
         ajxPost('<?= site_url(service('uri')->getSegment(1, 0) . '/edit'); ?>', {
             id: id
         }).done((respon) => {
-            $(".tampilAnggota").html(respon);
+            $(".tampilAnggota").html(respon.view);
         }).fail((e) => {
             alert(e.responseText);
         })

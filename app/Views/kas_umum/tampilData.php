@@ -145,16 +145,20 @@ $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
                 id: $(this).attr('data-id')
             };
             ajxPost('<?= site_url($uri->getSegment(1, 0) . '/formModalUbah') ?>', data).done(function(respon) {
-                $(".modal_view").html(respon.data).show();
+                $(".modal_view").html(respon.view).show();
                 $("#modal-form").modal('show');
+            }).fail((e) => {
+                alert(e.responseText);
             });
         });
 
         $(".tambah").click(function(e) {
             e.preventDefault();
             ajxGet('<?= site_url($uri->getSegment(1, 0) . '/formModalTambah') ?>').done(function(respon) {
-                $(".modal_view").html(respon.data).show();
+                $(".modal_view").html(respon.view).show();
                 $("#modal-form").modal('show');
+            }).fail((e) => {
+                alert(e.responseText);
             });
         });
     });

@@ -24,25 +24,15 @@ class Filters extends BaseConfig
 
 			'csrf' => ['except' => [
 				'anggota/email_cek',
-				'anggota/edit',
-
-				'kas-umum/hapus',
-				'kas-umum/formModalUbah',
-
-				'kategori/hapus',
 
 				'profile/password_cek',
 				'profile/ganti_photo',
 
 				'auth/email_cek',
 
-				'hak-akses/hapus',
-				'hak-akses/proses',
-				'hak-akses/form_modal',
-
-				'menu/simpan_menu',
-				'menu/modal_edit',
-				'menu/tambah',
+				// 'menu/simpan_menu',
+				// 'menu/modal_edit',
+				// 'menu/tambah',
 
 			]],
 			'noauth' => ['except' => [

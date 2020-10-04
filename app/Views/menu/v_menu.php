@@ -36,7 +36,7 @@
                         <p id="success-indicator" class="alert alert-success mt-2" style="display: none;">
                             <span class="fas fa-check-square"></span>&nbsp;&nbsp; Perubahan menu berhasil disimpan!
                         </p>
-                        <div class="overlay" style="display: none;"><i class="fas fa-3x fa-sync-alt fa-spin"></i></div>
+                        <div class="overlay"></div>
                         <div class="dd" id="nestable">
 
                         </div>
@@ -66,7 +66,6 @@
                     </div>
                     <div class="card-body">
                         <form action="<?= base_url(service('uri')->getSegment(1) . '/tambah') ?>" id="form-tambah-menu">
-                            <?= csrf_field(); ?>
                             <div class="form-group row">
                                 <label for="nama" class="col-sm-3 col-form-label">Nama Menu</label>
                                 <div class="col-sm-9">
@@ -111,7 +110,7 @@
 <script>
     function loadData() {
         let before = [
-            $(".overlay").show()
+            $(".overlay").html('<h5 class="text-center py-5"><i class="fas fa-spinner fa-spin "></i>&nbsp;&nbsp;Load menu...</h5>')
         ];
         ajxGet('<?= base_url(service('uri')->getSegment(1) . '/loadData'); ?>', before).done((respon) => {
             $(".dd").html(respon);
@@ -139,7 +138,7 @@
                     });
                 }
 
-                $.post('<?= base_url(service('uri')->getSegment(1) . '/simpan_menu'); ?>', {
+                ajxPost('<?= base_url(service('uri')->getSegment(1) . '/simpan_menu'); ?>', {
                             source: details.sourceId,
                             destination: details.destId,
                             order: JSON.stringify(order),

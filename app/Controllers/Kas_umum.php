@@ -33,11 +33,11 @@ class Kas_umum extends BaseController
                 'pengeluaran' => $this->kasUmumModel->total('pengeluaran')->getRowArray(),
             ];
 
-            $view = [
-                'data' => view('kas_umum/tampilData', $data)
+            $view_data = [
+                'view' => view('kas_umum/tampilData', $data)
             ];
 
-            echo json_encode($view);
+            echo json_encode($view_data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -56,11 +56,12 @@ class Kas_umum extends BaseController
                     'action' => base_url($uri->getSegment(1, 0) . '/tambah')
                 ]
             ];
-            $view = [
-                'data' => view('/kas_umum/form_modal', $data)
+            $view_data = [
+                'view' => view('/kas_umum/form_modal', $data),
+
             ];
 
-            echo json_encode($view);
+            echo json_encode($view_data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -82,11 +83,12 @@ class Kas_umum extends BaseController
                     'action' => base_url($uri->getSegment(1, 0) . '/ubah')
                 ]
             ];
-            $view = [
-                'data' => view('/kas_umum/form_modal', $data)
+            $view_data = [
+                'view' => view('/kas_umum/form_modal', $data),
+                // 'token' => csrf_hash(),
             ];
 
-            echo json_encode($view);
+            echo json_encode($view_data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
@@ -107,7 +109,12 @@ class Kas_umum extends BaseController
                 ];
 
                 $this->kasUmumModel->insert($data_arr);
-                echo json_encode(['action' => 'tambah', 'status' => $this->kasUmumModel->affectedRows()]);
+                $ouput = [
+                    'action' => 'tambah',
+                    'status' => $this->kasUmumModel->affectedRows(),
+                    'token' => csrf_hash(),
+                ];
+                echo json_encode($ouput);
             }
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -128,7 +135,12 @@ class Kas_umum extends BaseController
                 ];
 
                 $this->kasUmumModel->save($data_arr);
-                echo json_encode(['action' => 'update', 'status' => $this->kasUmumModel->affectedRows()]);
+                $ouput = [
+                    'action' => 'update',
+                    'status' => $this->kasUmumModel->affectedRows(),
+                    'token' => csrf_hash(),
+                ];
+                echo json_encode($ouput);
             }
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -140,7 +152,11 @@ class Kas_umum extends BaseController
         if ($this->request->isAJAX()) {
             $id = $this->request->getPost('id');
             $this->kasUmumModel->delete($id);
-            echo json_encode(['status' => $this->kasUmumModel->affectedRows()]);
+            $ouput = [
+                'status' => $this->kasUmumModel->affectedRows(),
+                'token' => csrf_hash(),
+            ];
+            echo json_encode($ouput);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }

@@ -27,7 +27,6 @@
                     </div>
                     <div class="card-body">
                         <form action="<?= base_url($uri->getSegment(1) . '/proses') ?>" method="post" id="form-add-level">
-                            <?= csrf_field() ?>
                             <input type="hidden" name="idleveluser" id="idleveluser">
                             <div class="form-group">
                                 <label for="kategori">Nama Level</label>
@@ -132,6 +131,8 @@
                     btn.prop('disabled', false);
                     btn.html('<i class="fas fa-save"></i>&nbsp;&nbsp;Simpan');
                     form.trigger('reset');
+                }).fail((e) => {
+                    alert(e.responseText);
                 });
             }
         });

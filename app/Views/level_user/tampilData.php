@@ -53,30 +53,49 @@
                 confirmButtonText: 'Ya, Hapus!'
             }).then((result) => {
                 if (result.value) {
-                    $.ajax({
-                        url: '<?= base_url($uri->getSegment(1) . '/hapus') ?>',
-                        dataType: 'json',
-                        method: 'post',
-                        data: {
-                            id: id
-                        },
-                        beforeSend: function() {
-                            btn.html('<i class="fas fa-spinner fa-spin"></i>');
-                        },
-                        success: function(response) {
-                            if (response > 0) {
-                                notif('success', 'Berhasil!', 'Data berhasil dihapus!', true);
-                                loadData();
-                                resetForm();
-                            } else {
-                                notif('error', 'Oops!', 'Data gagal dihapus!', true);
-                            }
-                        },
-                        complete: function() {
-
-                            btn.html('<i class="fas fa-trash-alt"></i>');
+                    const before = [
+                        btn.html('<i class="fas fa-spinner fa-spin"></i>')
+                    ];
+                    ajxPost('<?= base_url($uri->getSegment(1) . '/hapus') ?>', {
+                        id: id
+                    }, ).done((response) => {
+                        if (response.status > 0) {
+                            notif('success', 'Berhasil!', 'Data berhasil dihapus!', true);
+                            loadData();
+                            resetForm();
+                        } else {
+                            notif('error', 'Oops!', 'Data gagal dihapus!', true);
                         }
+                        btn.html('<i class="fas fa-trash-alt"></i>');
+                    }).fail((e) => {
+                        alert(e.responseText);
+                        btn.html('<i class="fas fa-trash-alt"></i>');
                     });
+
+                    // $.ajax({
+                    //     url: ,
+                    //     dataType: 'json',
+                    //     method: 'post',
+                    //     data: {
+                    //         id: id
+                    //     },
+                    //     beforeSend: function() {
+                    //         btn.html('<i class="fas fa-spinner fa-spin"></i>');
+                    //     },
+                    //     success: function(response) {
+                    //         if (response > 0) {
+                    //             notif('success', 'Berhasil!', 'Data berhasil dihapus!', true);
+                    //             loadData();
+                    //             resetForm();
+                    //         } else {
+                    //             notif('error', 'Oops!', 'Data gagal dihapus!', true);
+                    //         }
+                    //     },
+                    //     complete: function() {
+
+                    //         btn.html('<i class="fas fa-trash-alt"></i>');
+                    //     }
+                    // });
                 }
             })
         });

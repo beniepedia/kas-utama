@@ -3,7 +3,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="<?= base_url(service('uri')->getSegment(1) . '/edit') ?>" method="post" class="form-edit">
-                <?= csrf_field() ?>
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Menu</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

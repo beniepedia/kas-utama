@@ -229,8 +229,11 @@ class Anggota extends BaseController
                 'role' => $this->userLevel->asObject()->findAll(),
             ];
 
-            $view = view('anggota/edit', $data);
-            echo json_encode($view);
+            $view_data = [
+                'view' => view('anggota/edit', $data),
+                'token' => csrf_hash()
+            ];
+            echo json_encode($view_data);
         }
     }
 }

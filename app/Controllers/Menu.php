@@ -85,7 +85,7 @@ class Menu extends BaseController
                 }
             }
 
-            return 'ok ';
+            return json_encode(['token' => csrf_hash()]);
         }
     }
 
@@ -96,9 +96,12 @@ class Menu extends BaseController
                 'menu' => $this->menuModel->find($this->request->getPost('id'))
             ];
 
-            $view = view('menu/modal_edit', $data);
+            $view_data = [
+                'view' => view('menu/modal_edit', $data),
+                'token' => csrf_hash(),
+            ];
 
-            echo json_encode($view);
+            echo json_encode($view_data);
         }
     }
 
@@ -126,6 +129,8 @@ class Menu extends BaseController
             } else {
                 $output['status'] = 'error';
             }
+
+            $output['token'] = csrf_hash();
 
             echo json_encode($output);
         }

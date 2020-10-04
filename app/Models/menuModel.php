@@ -93,7 +93,7 @@ class menuModel extends Model
             <div class='nested-list-content'>" . ucfirst($item->nama_menu) . "
               <div class='float-right'>
                 <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-warning edit-menu' data-toggle='tooltip' title='Edit menu {$item->nama_menu}'><i class='fas fa-edit'></i></a>&nbsp;&nbsp;&nbsp;
-                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-danger lock-menu' data-toggle='tooltip' title='Nonaktifkan menu {$item->nama_menu}'><i class='fas fa-lock'></i></a>&nbsp;&nbsp;&nbsp;
+                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-danger status-menu' data-toggle='tooltip' title='Nonaktifkan menu {$item->nama_menu}'><i class='fas fa-lock'></i></a>&nbsp;&nbsp;&nbsp;
                 <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-danger hapus-menu' data-toggle='tooltip' title='Hapus menu {$item->nama_menu}'><i class='fas fa-trash-alt'></i></a>
               </div>
             </div>" . $this->build_menu($menu, $item->id_menu) . "</li>";

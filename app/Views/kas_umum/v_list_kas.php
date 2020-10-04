@@ -34,7 +34,7 @@
             view.html('<h4 class="text-center mt-5"><i class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;Loading data...</h4>')
         ];
         ajxGet('<?= site_url($uri->getSegment(1, 0) . '/loadData') ?>', before).done(function(respon) {
-            view.html(respon.data);
+            view.html(respon.view);
         }).fail(function() {
             view.html('<h4 class="text-center text-danger mt-5">Gagal mengambil data...</h4>');
         });
