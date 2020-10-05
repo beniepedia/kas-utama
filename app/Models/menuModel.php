@@ -15,7 +15,7 @@ class menuModel extends Model
 
     protected $returnType = 'array';
 
-    protected $allowedFields = ['nama_menu', 'url', 'level_menu', 'main_menu', 'no_urut', 'icon'];
+    protected $allowedFields = ['nama_menu', 'url', 'level_menu', 'main_menu', 'no_urut', 'icon', 'aktif'];
 
     protected $useTimestamps = true;
 
@@ -85,18 +85,33 @@ class menuModel extends Model
     {
         $result = null;
         foreach ($menu as $item)
+
             if ($item->main_menu == $parentID) {
+                if ($item->aktif == 'Y') {
+                    $icon = 'unlock';
+                    $color = 'success';
+                    $status = 'N';
+                    $title = 'Nonaktifkan menu';
+                } else {
+                    $icon = 'lock';
+                    $color = 'danger';
+                    $status = 'Y';
+                    $title = 'Aktifkan menu';
+                }
+
+
                 $result .= "<li class='dd-item nested-list-item' data-order='{$item->no_urut}' data-id='{$item->id_menu}'>
-            <div class='dd-handle nested-list-handle '>
-              <i class='fas fa-bars'></i>
-            </div>
-            <div class='nested-list-content'>" . ucfirst($item->nama_menu) . "
-              <div class='float-right'>
-                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-warning edit-menu' data-toggle='tooltip' title='Edit menu {$item->nama_menu}'><i class='fas fa-edit'></i></a>&nbsp;&nbsp;&nbsp;
-                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-danger status-menu' data-toggle='tooltip' title='Nonaktifkan menu {$item->nama_menu}'><i class='fas fa-lock'></i></a>&nbsp;&nbsp;&nbsp;
-                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-danger hapus-menu' data-toggle='tooltip' title='Hapus menu {$item->nama_menu}'><i class='fas fa-trash-alt'></i></a>
-              </div>
-            </div>" . $this->build_menu($menu, $item->id_menu) . "</li>";
+                            <div class='dd-handle nested-list-handle '>
+                            <i class='fas fa-bars'></i>
+                            </div>
+                            <div class='nested-list-content'>" . ucfirst($item->nama_menu) . "
+                            <div class='float-right'>
+                                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-warning edit-menu' data-toggle='tooltip' title='Edit menu {$item->nama_menu}'><i class='fas fa-edit'></i></a>&nbsp;&nbsp;&nbsp;
+                                
+                                <a href='javascript:void(0)' id-menu='{$item->id_menu}' nama-menu='$item->nama_menu' status='{$status}' class='text-{$color} status-menu' data-toggle='tooltip' title='{$title} {$item->nama_menu}'><i class='fas fa-{$icon}'></i></a>&nbsp;&nbsp;&nbsp;
+                                <a href='javascript:void(0)' id-menu='{$item->id_menu}' class='text-danger hapus-menu' nama-menu='$item->nama_menu' data-toggle='tooltip' title='Hapus menu {$item->nama_menu}'><i class='fas fa-trash-alt'></i></a>
+                            </div>
+                            </div>" . $this->build_menu($menu, $item->id_menu) . "</li>";
             }
         return $result ?  "\n<ol class=\"dd-list\">\n$result</ol>\n" : null;
     }

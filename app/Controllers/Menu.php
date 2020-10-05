@@ -32,6 +32,8 @@ class Menu extends BaseController
 
             $view = view('menu/tampilData', $data);
             echo json_encode($view);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -86,6 +88,8 @@ class Menu extends BaseController
             }
 
             return json_encode(['token' => csrf_hash()]);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -102,6 +106,8 @@ class Menu extends BaseController
             ];
 
             echo json_encode($view_data);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -133,6 +139,8 @@ class Menu extends BaseController
             $output['token'] = csrf_hash();
 
             echo json_encode($output);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 
@@ -148,6 +156,42 @@ class Menu extends BaseController
 
             $update = $this->menuModel->save($data);
             echo json_encode($update);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function edit_status()
+    {
+        if ($this->request->isAJAX()) {
+            $data = [
+                'id_menu' => $this->request->getPost('id'),
+                'aktif' => $this->request->getPost('status'),
+            ];
+
+            $update = [
+                'status' => $this->menuModel->save($data),
+                'token' => csrf_hash()
+            ];
+            echo json_encode($update);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function hapus()
+    {
+        if ($this->request->isAJAX()) {
+            $this->menuModel->delete($this->request->getPost('id'));
+
+            $output = [
+                'status' => $this->menuModel->affectedRows(),
+                'token' => csrf_hash(),
+            ];
+
+            echo json_encode($output);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 }

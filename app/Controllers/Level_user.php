@@ -34,6 +34,8 @@ class Level_user extends BaseController
                 'data' => view('level_user/tampilData', $data)
             ];
             echo json_encode($msg);
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 

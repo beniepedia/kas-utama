@@ -114,6 +114,7 @@
         ];
         ajxGet('<?= base_url(service('uri')->getSegment(1) . '/loadData'); ?>', before).done((respon) => {
             $(".dd").html(respon);
+            $(".overlay").hide();
         });
     }
 
