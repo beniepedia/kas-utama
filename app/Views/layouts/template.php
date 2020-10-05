@@ -43,6 +43,8 @@ $userBaru = count($userData);
     <link rel="stylesheet" href="<?= base_url('assets') ?>/css/adminlte.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/sweetalert2/sweetalert2.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- Ekko Lightbox -->
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/ekko-lightbox/ekko-lightbox.css">
     <!-- Bootstrap file input -->
@@ -251,6 +253,10 @@ $userBaru = count($userData);
     <!-- Croppie JS -->
     <script src="<?= base_url('assets') ?>/plugins/croppie/js/croppie.js"></script>
     <script src="<?= base_url('assets') ?>/plugins/croppie/js/exif.js"></script>
+    <!-- daterangepicker -->
+    <script src="<?= base_url('assets') ?>/plugins/moment/moment.min.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="<?= base_url('assets') ?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
     <!-- Bootstrap File Input -->
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>
