@@ -66,6 +66,13 @@
             <!-- ./col -->
         </div>
         <hr>
+
+        <div class="grafik">
+
+
+        </div>
+
+        <hr>
         <div class="row">
             <div class="col-sm-6">
                 dsadasdas
@@ -117,11 +124,23 @@
 <!-- /.content -->
 
 <script>
+    function loadGrafik() {
+        ajxGet('<?= site_url(service('uri')->getSegment(1, 0) . '/loadGrafik'); ?>').done((respon) => {
+            $(".grafik").html(respon);
+        });
+    }
+
+
     $(function() {
         $('#calendar').datetimepicker({
             format: 'L',
             inline: true
-        })
+        });
+
+        loadGrafik();
+
+
+
     });
 </script>
 

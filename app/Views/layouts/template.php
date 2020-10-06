@@ -266,6 +266,8 @@ $userBaru = count($userData);
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-fileinput/js/locales/id.js" type="text/javascript"></script>
     <!-- SweetAlert2 -->
     <script src="<?= base_url('assets') ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <!-- ChartJS -->
+    <script src="<?= base_url('assets') ?>/plugins/chart.js/Chart.min.js"></script>
     <!-- Datepicker -->
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.id.min.js"></script>
