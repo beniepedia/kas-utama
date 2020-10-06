@@ -66,11 +66,10 @@
             <!-- ./col -->
         </div>
         <hr>
+        <figure class="highcharts-figure">
+            <div id="grafik"></div>
 
-        <div class="grafik">
-
-
-        </div>
+        </figure>
 
         <hr>
         <div class="row">
@@ -126,7 +125,95 @@
 <script>
     function loadGrafik() {
         ajxGet('<?= site_url(service('uri')->getSegment(1, 0) . '/loadGrafik'); ?>').done((respon) => {
-            $(".grafik").html(respon);
+
+            console.log(respon.m);
+            var bulan = [];
+            var masuk = [];
+            var keluar = [];
+
+            var _bulan = [
+                "Januari",
+                "Februari",
+                "Maret",
+                "April",
+                "Mei",
+                "Juni",
+                "Juli",
+                "Agustus",
+                "September",
+                "Oktober",
+                "November",
+                "Desember",
+            ];
+
+            for (var i in respon.m) {
+                bulan.push(_bulan[respon.m[i].bulan - 1]);
+                masuk.push(respon.m[i].total);
+
+            }
+
+            for (var i in respon.p) {
+                // bulan.push(_bulan[respon.m[i].bulan - 1]);
+                keluar.push(respon.p[i].total);
+
+            }
+
+            var masuk = masuk.map(Number);
+            var keluar = keluar.map(Number);
+
+
+            Highcharts.chart('grafik', {
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: 'Grafik pemasukan dan pengeluaran KAS UMUM'
+                },
+                subtitle: {
+                    text: 'Source: Wikipedia.org'
+                },
+                xAxis: {
+                    categories: bulan,
+                    tickmarkPlacement: 'on',
+                    title: {
+                        enabled: true
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Jumlah'
+                    },
+                    labels: {
+                        // formatter: function() {
+                        //     return value;
+                        // }
+                    }
+                },
+                tooltip: {
+                    split: false,
+                    valueSuffix: ' '
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'normal',
+                        lineColor: '#666666',
+                        lineWidth: 1,
+                        marker: {
+                            lineWidth: 1,
+                            lineColor: '#666666'
+                        }
+                    }
+                },
+                series: [{
+                        name: 'Pemasukan',
+                        data: masuk
+                    },
+                    {
+                        name: 'Pengeluaran',
+                        data: keluar
+                    }
+                ]
+            });
         });
     }
 
@@ -137,9 +224,8 @@
             inline: true
         });
 
+
         loadGrafik();
-
-
 
     });
 </script>

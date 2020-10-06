@@ -268,6 +268,9 @@ $userBaru = count($userData);
     <script src="<?= base_url('assets') ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
     <!-- ChartJS -->
     <script src="<?= base_url('assets') ?>/plugins/chart.js/Chart.min.js"></script>
+    <!-- Highchart -->
+    <script src="<?= base_url('assets') ?>/plugins/highchart/highcharts.js"></script>
+    <script src="<?= base_url('assets') ?>/plugins/highchart/exporting.js"></script>
     <!-- Datepicker -->
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.id.min.js"></script>

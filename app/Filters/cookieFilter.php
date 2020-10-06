@@ -41,6 +41,9 @@ class cookieFilter implements FilterInterface
             return redirect()->to('dashboard');
         }
 
+        if (session()->has('isLogged')) {
+            return redirect()->to('/dashboard');
+        }
 
 
         //--------------------------------------------------------------------

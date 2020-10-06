@@ -15,16 +15,6 @@ class Dashboard extends BaseController
     public function index()
     {
 
-        $data = $this->kasUmumModel
-            ->select('jenis_kas, MONTH(tanggal) as bulan, YEAR(tanggal) as tahun, SUM(jumlah) as total')
-            ->groupBy('bulan')
-            ->orderby('bulan')
-            ->findAll();
-        d($data);
-
-        die;
-
-
 
         $data = [
             'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1))),
@@ -42,10 +32,33 @@ class Dashboard extends BaseController
 
     public function loadGrafik()
     {
-        if ($this->request->isAJAX()) {
-            $view_data = view('dashboard/grafik');
+        // if ($this->request->isAJAX()) {
+        // $view_data = view('dashboard/grafik');
 
-            echo json_encode($view_data);
-        }
+        // echo json_encode($view_data);
+
+
+        // $data_chart = $this->kasUmumModel
+        //     ->select('jenis_kas, MONTH(tanggal) as bulan, SUM(jumlah) as total')
+        //     ->where('YEAR(tanggal)', date('Y'))
+        //     ->groupBy('bulan')->findALl();
+        $data_m = $this->kasUmumModel
+            ->select('jenis_kas, MONTH(tanggal) as bulan, SUM(jumlah) as total')
+            ->where('YEAR(tanggal)', date('Y'))
+            ->where('jenis_kas', 'pemasukan')
+            ->groupBy('bulan')->findAll();
+
+        $data_p = $this->kasUmumModel
+            ->select('jenis_kas, MONTH(tanggal) as bulan, SUM(jumlah) as total')
+            ->where('YEAR(tanggal)', date('Y'))
+            ->where('jenis_kas', 'pengeluaran')
+            ->groupBy('bulan')->findAll();
+
+        $output = [
+            'm' => $data_m,
+            'p' => $data_p
+        ];
+
+        return json_encode($output);
     }
 }
