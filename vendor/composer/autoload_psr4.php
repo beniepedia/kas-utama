@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'monken\\' => array($vendorDir . '/monken/cli-create/src'),
-    'Tests\\Support\\' => array($baseDir . '/tests/_support'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),

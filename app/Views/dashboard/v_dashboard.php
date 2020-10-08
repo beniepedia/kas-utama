@@ -126,8 +126,11 @@
     function loadGrafik() {
         ajxGet('<?= site_url(service('uri')->getSegment(1, 0) . '/loadGrafik'); ?>').done((respon) => {
 
-            console.log(respon.m);
-            var bulan = [];
+            // console.log(respon);
+
+
+            var bulan_m = [];
+            var bulan_k = [];
             var masuk = [];
             var keluar = [];
 
@@ -146,73 +149,67 @@
                 "Desember",
             ];
 
-            for (var i in respon.m) {
-                bulan.push(_bulan[respon.m[i].bulan - 1]);
-                masuk.push(respon.m[i].total);
+            // for (var i in respon.masuk) {
+            //     bulan_m.push(respon.masuk[i].bulan);
+            //     masuk.push(respon.masuk[i].total);
+            // }
 
-            }
 
-            for (var i in respon.p) {
-                // bulan.push(_bulan[respon.m[i].bulan - 1]);
-                keluar.push(respon.p[i].total);
+            // for (var i in respon.keluar) {
+            //     bulan_k.push(_bulan[respon.keluar[i].bulan - 1]);
+            //     keluar.push(respon.keluar[i].total);
+            // }
 
-            }
 
-            var masuk = masuk.map(Number);
-            var keluar = keluar.map(Number);
+            // console.log(bulan_m.concat(bulan_p));
+
+            // var masuk = masuk.map(Number);
+            // var keluar = keluar.map(Number);
 
 
             Highcharts.chart('grafik', {
                 chart: {
-                    type: 'area'
+                    type: 'column'
                 },
                 title: {
-                    text: 'Grafik pemasukan dan pengeluaran KAS UMUM'
+                    text: 'Monthly Average Rainfall'
                 },
                 subtitle: {
-                    text: 'Source: Wikipedia.org'
+                    text: 'Source: WorldClimate.com'
                 },
                 xAxis: {
-                    categories: bulan,
-                    tickmarkPlacement: 'on',
-                    title: {
-                        enabled: true
-                    }
+                    categories: _bulan,
+                    crosshair: true
                 },
                 yAxis: {
+                    min: 0,
                     title: {
-                        text: 'Jumlah'
-                    },
-                    labels: {
-                        // formatter: function() {
-                        //     return value;
-                        // }
+                        text: 'Jumlah (Rp)'
                     }
                 },
                 tooltip: {
-                    split: false,
-                    valueSuffix: ' '
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
                 },
                 plotOptions: {
-                    area: {
-                        stacking: 'normal',
-                        lineColor: '#666666',
-                        lineWidth: 1,
-                        marker: {
-                            lineWidth: 1,
-                            lineColor: '#666666'
-                        }
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
                     }
                 },
                 series: [{
-                        name: 'Pemasukan',
-                        data: masuk
-                    },
-                    {
-                        name: 'Pengeluaran',
-                        data: keluar
-                    }
-                ]
+                    name: 'Pemasukan',
+                    data: [10, 0, 2]
+
+                }, {
+                    name: 'Keluar',
+                    data: [0, 20, 10]
+
+                }]
             });
         });
     }

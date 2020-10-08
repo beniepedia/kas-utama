@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class kas_umum extends Migration
+class KasUmum extends Migration
 {
 	public function up()
 	{
@@ -22,10 +22,14 @@ class kas_umum extends Migration
 				'constraint' => 11,
 			],
 			'jenis_kas' => [
-				'type' => 'VARCHAR',
-				'constraint' => 30,
+				'type' => 'ENUM',
+				'constraint' => ['M', 'K'],
 			],
-			'jumlah' => [
+			'masuk' => [
+				'type' => 'DOUBLE',
+				'default' => 0,
+			],
+			'keluar' => [
 				'type' => 'DOUBLE',
 				'default' => 0,
 			],
@@ -42,7 +46,7 @@ class kas_umum extends Migration
 			]
 		]);
 
-		$this->forge->addKey('kode_kas_umum', TRUE);
+		$this->forge->addPrimaryKey('kode_kas_umum');
 		$this->forge->addKey('id_kategori');
 		$this->forge->addForeignKey('id_kategori', 'kategori', 'id_kategori', 'RESTRICT', 'CASCADE');
 		$this->forge->createTable('kas_umum');
@@ -52,8 +56,7 @@ class kas_umum extends Migration
 
 	public function down()
 	{
-		//
 		$this->forge->dropForeignKey('kas_umum', 'kas_umum_id_kategori_foreign');
-		$this->forge->dropTable('kas_umum');
+		$this->forge->dropTable('tb_kas_umum');
 	}
 }
