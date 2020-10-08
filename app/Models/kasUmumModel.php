@@ -22,12 +22,9 @@ class kasUmumModel extends Model
         return $builder;
     }
 
-    public function total(String $jenis)
+    public function total_kas_masuk(String $jenis)
     {
-        $builder = $this->table($this->table);
-        $query = $builder->selectSum('jumlah');
-        $query = $builder->where('jenis_kas', $jenis);
-        $query = $builder->get();
-        return $query;
+        // $this->selectSum('masuk')->where('');
+        // return $query;
     }
 }

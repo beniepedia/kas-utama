@@ -9,8 +9,8 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3 class="count"><?= ($total_kas_umum['jumlah'] ? indo_currency($total_kas_umum['jumlah']) : 'Rp. 0') ?></h3>
-                        <p>Total KAS Masuk</p>
+                        <h3 class="count"><?= ($kas ? indo_currency($kas->total_kas_masuk) : 'Rp. 0') ?></h3>
+                        <p>Total pemasukan KAS UMUM</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -21,11 +21,10 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-success">
+                <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                        <p>Bounce Rate</p>
+                        <h3><?= ($kas ? indo_currency($kas->total_kas_keluar) : 'Rp. 0') ?></h3>
+                        <p>Total pengeluaran KAS UMUM</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -66,19 +65,44 @@
             <!-- ./col -->
         </div>
         <hr>
-        <figure class="highcharts-figure">
-            <div id="grafik"></div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool refresh" data-toggle="tooltip" title="Refresh" onclick="loadGrafik()"><i class="fas fa-sync-alt"></i></button>
+                            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Perkecil" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Perbesar" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Sembunyikan" data-card-widget="remove"><i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="grafik"></div>
 
-        </figure>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Kategori</div>
+                    </div>
+                    <div class="card-body">
+                        <div id="kategori"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <hr>
         <div class="row">
-            <div class="col-sm-6">
-                dsadasdas
-            </div>
+
 
             <!-- kalender -->
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <!-- Calendar -->
                 <div class="card bg-gradient-dark">
                     <div class="card-header border-0">
@@ -126,13 +150,10 @@
     function loadGrafik() {
         ajxGet('<?= site_url(service('uri')->getSegment(1, 0) . '/loadGrafik'); ?>').done((respon) => {
 
-            // console.log(respon);
-
-
-            var bulan_m = [];
-            var bulan_k = [];
+            var bulan = [];
             var masuk = [];
             var keluar = [];
+            var date = new Date();
 
             var _bulan = [
                 "Januari",
@@ -148,37 +169,34 @@
                 "November",
                 "Desember",
             ];
+            for (var i in respon.grafik) {
+                bulan.push(_bulan[respon.grafik[i].bulan - 1]);
+                masuk.push(respon.grafik[i].masuk);
+                keluar.push(respon.grafik[i].keluar);
+            }
 
-            // for (var i in respon.masuk) {
-            //     bulan_m.push(respon.masuk[i].bulan);
-            //     masuk.push(respon.masuk[i].total);
-            // }
-
-
-            // for (var i in respon.keluar) {
-            //     bulan_k.push(_bulan[respon.keluar[i].bulan - 1]);
-            //     keluar.push(respon.keluar[i].total);
-            // }
+            masuk = masuk.map(Number);
+            keluar = keluar.map(Number);
 
 
-            // console.log(bulan_m.concat(bulan_p));
-
-            // var masuk = masuk.map(Number);
-            // var keluar = keluar.map(Number);
-
-
+            Highcharts.setOptions({
+                lang: {
+                    thousandsSep: ','
+                }
+            });
             Highcharts.chart('grafik', {
+
                 chart: {
                     type: 'column'
                 },
                 title: {
-                    text: 'Monthly Average Rainfall'
+                    text: 'Grafik Pemasukan & Pengeluaran KAS UMUM Thn ' + date.getFullYear()
                 },
                 subtitle: {
-                    text: 'Source: WorldClimate.com'
+                    text: ''
                 },
                 xAxis: {
-                    categories: _bulan,
+                    categories: bulan,
                     crosshair: true
                 },
                 yAxis: {
@@ -190,7 +208,7 @@
                 tooltip: {
                     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                        '<td style="padding:0"><b>Rp {point.y:,.0f}</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true
@@ -203,14 +221,28 @@
                 },
                 series: [{
                     name: 'Pemasukan',
-                    data: [10, 0, 2]
+                    data: masuk
 
                 }, {
-                    name: 'Keluar',
-                    data: [0, 20, 10]
+                    name: 'Pengeluaran',
+                    data: keluar
 
                 }]
             });
+
+            var html = [];
+            var max = 100;
+            $.each(respon.kategori, function(i, v) {
+                html += `<div class="progress-group">
+                            ` + v.nama_kategori.toUpperCase() + `
+                            <span class="float-right"><b>${v.total}</b>/100</span>
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-` + (v.total <= 50 ? 'success' : (v.total > 85 ? 'danger' : 'warning')) + `" style="width: ` + v.total * 100 / max + `%"></div>
+                            </div>
+                        </div>`;
+            });
+
+            $("#kategori").html(html);
         });
     }
 

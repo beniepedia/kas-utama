@@ -18,6 +18,10 @@ class ComposerStaticInitd4041181994915ccaa047c26e390b89b
         array (
             'monken\\' => 7,
         ),
+        'T' => 
+        array (
+            'Tests\\Support\\' => 14,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Ctype\\' => 23,
@@ -40,6 +44,10 @@ class ComposerStaticInitd4041181994915ccaa047c26e390b89b
         array (
             'Kint\\' => 5,
         ),
+        'F' => 
+        array (
+            'Faker\\' => 6,
+        ),
         'C' => 
         array (
             'CodeIgniter\\' => 12,
@@ -54,6 +62,10 @@ class ComposerStaticInitd4041181994915ccaa047c26e390b89b
         'monken\\' => 
         array (
             0 => __DIR__ . '/..' . '/monken/cli-create/src',
+        ),
+        'Tests\\Support\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests/_support',
         ),
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
@@ -82,6 +94,10 @@ class ComposerStaticInitd4041181994915ccaa047c26e390b89b
         'Kint\\' => 
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
         'CodeIgniter\\' => 
         array (
