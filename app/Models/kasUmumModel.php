@@ -10,21 +10,20 @@ class kasUmumModel extends Model
     protected $primaryKey = 'kode_kas_umum';
 
     protected $returnType = 'array';
-    protected $allowedFields = ['kode_kas_umum', 'tanggal', 'id_kategori', 'jumlah', 'jenis_kas', 'keterangan'];
+    protected $allowedFields = ['kode_kas_umum', 'tanggal', 'id_kategori', 'masuk', 'keluar', 'jenis_kas', 'keterangan'];
 
     protected $useTimestamps = true;
 
     public function getAll()
     {
-        $builder = $this->join('kategori', 'kategori.id_kategori=' . $this->table . '.id_kategori')
+        $data = $this->asObject()->join('kategori', 'kategori.id_kategori=' . $this->table . '.id_kategori')
             ->orderby('created_at', 'DESC')
             ->findAll();
-        return $builder;
+        return $data;
     }
 
-    public function total_kas_masuk(String $jenis)
+    public function getTotal()
     {
-        // $this->selectSum('masuk')->where('');
-        // return $query;
+        return $this->asObject()->select('SUM(masuk) AS total_kas_masuk,SUM(keluar) AS total_kas_keluar')->first();
     }
 }

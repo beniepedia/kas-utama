@@ -35,7 +35,7 @@
         ];
         ajxGet('<?= site_url($uri->getSegment(1, 0) . '/loadData') ?>', before).done(function(respon) {
             view.html(respon.view);
-        }).fail(function() {
+        }).fail(function(e) {
             view.html('<h4 class="text-center text-danger mt-5">Gagal mengambil data...</h4>');
         });
     }

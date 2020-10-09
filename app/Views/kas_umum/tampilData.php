@@ -1,5 +1,5 @@
 <?php
-$saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
+// $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
 ?>
 <div class="row mb-3">
     <div class="col">
@@ -13,7 +13,7 @@ $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
 
             <div class="info-box-content">
                 <span class="info-box-text">Total Pemasukan</span>
-                <span class="info-box-number"><?= ($pemasukan['jumlah'] ? indo_currency($pemasukan['jumlah']) : 'Rp. 0') ?></span>
+                <span class="info-box-number"><?= indo_currency($total->total_kas_masuk) ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -26,7 +26,7 @@ $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
 
             <div class="info-box-content">
                 <span class="info-box-text">Total Pengeluaran</span>
-                <span class="info-box-number"><?= ($pengeluaran['jumlah'] ? indo_currency($pengeluaran['jumlah']) : 'Rp. 0') ?></span>
+                <span class="info-box-number"><?= indo_currency($total->total_kas_keluar) ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -39,7 +39,7 @@ $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
 
             <div class="info-box-content">
                 <span class="info-box-text">Total Saldo</span>
-                <span class="info-box-number"><?= indo_currency($saldo) ?></span>
+                <span class="info-box-number"><?= indo_currency($total->total_kas_masuk - $total->total_kas_keluar) ?></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -67,31 +67,31 @@ $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
                     <th>No</th>
                     <th>Kode Transaksi</th>
                     <th>Tanggal</th>
-                    <th>Kategori</th>
+                    <th>Masuk</th>
+                    <th>Keluar</th>
                     <th>Jenis</th>
-                    <th>Jumlah</th>
-                    <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1;
-                foreach ($transaksi as $kas) : ?>
+                foreach ($kas as $kas) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td><?= $kas['kode_kas_umum'] ?></td>
-                        <td><?= date('d/m/Y', strtotime($kas['tanggal'])) ?></td>
-                        <td><?= ucfirst($kas['nama_kategori']) ?></td>
+                        <td><?= $kas->kode_kas_umum ?></td>
+                        <td><?= indo_date($kas->tanggal) ?></td>
+                        <td><?= indo_currency($kas->masuk) ?></td>
+                        <td><?= indo_currency($kas->keluar) ?></td>
                         <td>
-                            <div class="badge badge-<?= ($kas['jenis_kas'] == 'pemasukan' ? 'success' : 'danger') ?>">
-                                <?= ucfirst($kas['jenis_kas']) ?>
-                            </div>
+                            <?php if ($kas->jenis_kas == "M") : ?>
+                                <i class="fas fa-angle-double-up text-success" data-toggle="tooltip" data-placement="auto" title="Kas masuk" style="cursor: pointer;"></i>
+                            <?php else : ?>
+                                <i class="fas fa-angle-double-down text-danger" data-toggle="tooltip" data-placement="auto" title="Kas keluar" style="cursor: pointer;"></i>
+                            <?php endif ?>
                         </td>
-                        <td><?= indo_currency($kas['jumlah']) ?></td>
-                        <td><?= $kas['keterangan'] ?></td>
                         <td>
-                            <a href="javascript:void(0)" class="text-warning edit" data-id="<?= $kas['kode_kas_umum'] ?>"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                            <a href="javascript:void(0)" class="text-danger delete" data-id="<?= $kas['kode_kas_umum'] ?>"><i class="fas fa-trash-alt"></i></a>
+                            <a href="javascript:void(0)" class="text-warning edit" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                            <a href="javascript:void(0)" class="text-danger delete" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 <?php endforeach ?>

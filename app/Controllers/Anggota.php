@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Libraries\Permision;
 use App\Models\penggunaModel;
 use App\Models\levelUserModel;
 

@@ -1,13 +1,20 @@
 <?php
 
 if (!function_exists('indo_currency')) {
-    function indo_currency($angka)
+    function indo_currency($angka = NULL)
     {
-        if (is_numeric($angka)) {
-            $angka = 'Rp ' . number_format($angka, '0', ',', '.');
+
+        if ($angka == NULL) {
+            $angka = 'Rp 0';
         } else {
-            $angka = 'Format angka tidak valid!';
+            if (is_numeric($angka)) {
+                $angka = 'Rp ' . number_format($angka, '0', ',', '.');
+            } else {
+                $angka = 'Format angka tidak valid!';
+            }
         }
+
+
         return $angka;
     }
 }

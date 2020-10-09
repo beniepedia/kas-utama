@@ -1,5 +1,4 @@
 <form role="form" action="<?= $datamodal['action'] ?>" method="post" id="form-kas" autocomplete="off">
-    <?= csrf_field() ?>
     <div class="modal fade" id="modal-form">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -36,14 +35,18 @@
                             <label for="">Jenis :</label>
                             <select name="jenis" class="select2bs4">
                                 <option value="" selected disabled>Pilih jenis</option>
-                                <option value="pemasukan" <?= (isset($kas['jenis_kas']) && $kas['jenis_kas'] == 'pemasukan')  ? 'selected' : null ?>>Pemasukan</option>
-                                <option value="pengeluaran" <?= (isset($kas['jenis_kas']) && $kas['jenis_kas'] == 'pengeluaran')  ? 'selected' : null ?>>Pengeluran</option>
+                                <option value="M" <?= (isset($kas['jenis_kas']) && $kas['jenis_kas'] == 'M')  ? 'selected' : null ?>>Pemasukan</option>
+                                <option value="K" <?= (isset($kas['jenis_kas']) && $kas['jenis_kas'] == 'K')  ? 'selected' : null ?>>Pengeluran</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="">Jumlah (Rp)</label>
-                            <input type="text" name="jumlah" class="form-control" value="<?= (isset($kas['jumlah'])) ? $kas['jumlah'] : '' ?>">
+                            <?php if (isset($kas['jenis_kas']) && $kas['jenis_kas'] == "M") : ?>
+                                <input type="text" name="jumlah" class="form-control" value="<?= $kas['masuk'] ?>">
+                            <?php elseif (isset($kas['jenis_kas']) && $kas['jenis_kas'] == "K") : ?>
+                                <input type="text" name="jumlah" class="form-control" value="<?= $kas['keluar'] ?>">
+                            <?php endif ?>
                         </div>
                         <div class="form-group">
                             <label for="">Keterangan :</label>

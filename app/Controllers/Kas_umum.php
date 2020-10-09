@@ -28,9 +28,8 @@ class Kas_umum extends BaseController
     {
         if ($this->request->isAJAX()) {
             $data = [
-                'transaksi' => $this->kasUmumModel->getAll(),
-                'pemasukan' => $this->kasUmumModel->total('pemasukan')->getRowArray(),
-                'pengeluaran' => $this->kasUmumModel->total('pengeluaran')->getRowArray(),
+                'kas' => $this->kasUmumModel->getAll(),
+                'total' => $this->kasUmumModel->getTotal(),
             ];
 
             $view_data = [
@@ -85,7 +84,7 @@ class Kas_umum extends BaseController
             ];
             $view_data = [
                 'view' => view('/kas_umum/form_modal', $data),
-                // 'token' => csrf_hash(),
+                'token' => csrf_hash(),
             ];
 
             echo json_encode($view_data);
@@ -100,13 +99,18 @@ class Kas_umum extends BaseController
         if ($this->request->isAJAX()) {
             if (isset($_POST['tambah'])) {
                 $data_arr = [
-                    'kode_kas_umum' => 'T-' . date('dgis'),
+                    'kode_kas_umum' => 'KU-' . date('ymdis'),
                     'tanggal' => date("Y-m-d", strtotime($this->request->getPost('tanggal'))),
                     'id_kategori' => $this->request->getPost('kategori'),
                     'jenis_kas' => $this->request->getPost('jenis'),
-                    'jumlah' => str_replace('.', '', $this->request->getPost('jumlah')),
                     'keterangan' => esc(trim($this->request->getPost('keterangan')))
                 ];
+
+                if ($this->request->getPost('jenis') == "M") {
+                    $data_arr['masuk'] =  str_replace('.', '', $this->request->getPost('jumlah'));
+                } elseif ($this->request->getPost('jenis') == "K") {
+                    $data_arr['keluar   '] =  str_replace('.', '', $this->request->getPost('jumlah'));
+                }
 
                 $this->kasUmumModel->insert($data_arr);
                 $ouput = [

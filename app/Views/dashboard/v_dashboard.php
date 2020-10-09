@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/template') ?>
 <?= $this->section('content') ?>
-<?php helper('fungsi') ?>
 <!-- Main content -->
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -9,7 +9,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3 class="count"><?= ($kas ? indo_currency($kas->total_kas_masuk) : 'Rp. 0') ?></h3>
+                        <h3 class="count"><?= indo_currency($kas->total_kas_masuk) ?></h3>
                         <p>Total pemasukan KAS UMUM</p>
                     </div>
                     <div class="icon">
@@ -23,7 +23,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3><?= ($kas ? indo_currency($kas->total_kas_keluar) : 'Rp. 0') ?></h3>
+                        <h3><?= indo_currency($kas->total_kas_keluar) ?></h3>
                         <p>Total pengeluaran KAS UMUM</p>
                     </div>
                     <div class="icon">
