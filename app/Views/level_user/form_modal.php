@@ -51,16 +51,20 @@
                                         <td class="text-center">
                                             <?= checkbox('akses', $no, 'primary', $lm["akses"]) ?>
                                         </td>
-                                        <td class="text-center">
-                                            <?= checkbox('tambah', $no, 'success', $lm["tambah"]) ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?= checkbox('edit', $no, 'warning', $lm["edit"]) ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?= checkbox('hapus', $no, 'danger', $lm["hapus"]) ?>
-                                        </td>
 
+                                        <?php if ($lm['url'] == '#') : ?>
+                                            <td colspan="4"></td>
+                                        <?php else : ?>
+                                            <td class="text-center">
+                                                <?= checkbox('tambah', $no, 'success', $lm["tambah"]) ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?= checkbox('edit', $no, 'warning', $lm["edit"]) ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <?= checkbox('hapus', $no, 'danger', $lm["hapus"]) ?>
+                                            </td>
+                                        <?php endif ?>
 
                                     </tr>
                                 <?php $no++;

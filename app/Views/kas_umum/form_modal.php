@@ -46,6 +46,8 @@
                                 <input type="text" name="jumlah" class="form-control" value="<?= $kas['masuk'] ?>">
                             <?php elseif (isset($kas['jenis_kas']) && $kas['jenis_kas'] == "K") : ?>
                                 <input type="text" name="jumlah" class="form-control" value="<?= $kas['keluar'] ?>">
+                            <?php else : ?>
+                                <input type="text" name="jumlah" class="form-control">
                             <?php endif ?>
                         </div>
                         <div class="form-group">

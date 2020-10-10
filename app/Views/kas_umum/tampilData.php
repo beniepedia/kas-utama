@@ -47,56 +47,85 @@
     </div>
 </div>
 
-<div class="card ">
-    <div class="card-header">
-        <h5 class="card-title">Daftar Transaksi</h5>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool refresh" data-toggle="tooltip" title="Refresh" onclick="loadData()"><i class="fas fa-sync-alt"></i></button>
-            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Perkecil" data-card-widget="collapse"><i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Perbesar" data-card-widget="maximize"><i class="fas fa-expand"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Sembunyikan" data-card-widget="remove"><i class="fas fa-times"></i>
-            </button>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header">
+                <h5 class="card-title">Daftar Transaksi</h5>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool refresh" data-toggle="tooltip" title="Refresh" onclick="loadData()"><i class="fas fa-sync-alt"></i></button>
+                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Perkecil" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Perbesar" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Sembunyikan" data-card-widget="remove"><i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-hover table-bordered text-center" id="tabel-kas-masuk">
+                    <thead class="bg-gray">
+                        <tr>
+                            <th>No</th>
+                            <th>Kode Transaksi</th>
+                            <th>Tanggal</th>
+                            <th>Masuk</th>
+                            <th>Keluar</th>
+                            <th>Jenis</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($kas as $kas) : ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $kas->kode_kas_umum ?></td>
+                                <td><?= indo_date($kas->tanggal) ?></td>
+                                <td><?= indo_currency($kas->masuk) ?></td>
+                                <td><?= indo_currency($kas->keluar) ?></td>
+                                <td>
+                                    <?php if ($kas->jenis_kas == "M") : ?>
+                                        <i class="fas fa-angle-double-up text-success" data-toggle="tooltip" data-placement="auto" title="Kas masuk" style="cursor: pointer;"></i>
+                                    <?php else : ?>
+                                        <i class="fas fa-angle-double-down text-danger" data-toggle="tooltip" data-placement="auto" title="Kas keluar" style="cursor: pointer;"></i>
+                                    <?php endif ?>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" class="text-info detail" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
+                                    <a href="javascript:void(0)" class="text-warning edit" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                                    <a href="javascript:void(0)" class="text-danger delete" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <div class="card-body">
-        <table class="table table-hover table-bordered text-center" id="tabel-kas-masuk">
-            <thead class="bg-gray">
-                <tr>
-                    <th>No</th>
-                    <th>Kode Transaksi</th>
-                    <th>Tanggal</th>
-                    <th>Masuk</th>
-                    <th>Keluar</th>
-                    <th>Jenis</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $no = 1;
-                foreach ($kas as $kas) : ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= $kas->kode_kas_umum ?></td>
-                        <td><?= indo_date($kas->tanggal) ?></td>
-                        <td><?= indo_currency($kas->masuk) ?></td>
-                        <td><?= indo_currency($kas->keluar) ?></td>
-                        <td>
-                            <?php if ($kas->jenis_kas == "M") : ?>
-                                <i class="fas fa-angle-double-up text-success" data-toggle="tooltip" data-placement="auto" title="Kas masuk" style="cursor: pointer;"></i>
-                            <?php else : ?>
-                                <i class="fas fa-angle-double-down text-danger" data-toggle="tooltip" data-placement="auto" title="Kas keluar" style="cursor: pointer;"></i>
-                            <?php endif ?>
-                        </td>
-                        <td>
-                            <a href="javascript:void(0)" class="text-warning edit" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                            <a href="javascript:void(0)" class="text-danger delete" data-id="<?= $kas->kode_kas_umum ?>"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
-        </table>
+
+    <div class="detail-view">
+        <div class="modal fade" id="modal-detail">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Detail Kas Umum</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
     </div>
 </div>
 
@@ -152,6 +181,18 @@
             });
         });
 
+        $("#tabel-kas-masuk").on('click', '.detail', function(e) {
+            let modal = $("#modal-detail");
+            const data = {
+                id: $(this).attr('data-id')
+            };
+            ajxPost('<?= site_url($uri->getSegment(1, 0) . '/detail') ?>', data).done((respon) => {
+                modal.find(".modal-body").html(respon.data);
+
+                modal.modal('show');
+            });
+        });
+
         $(".tambah").click(function(e) {
             e.preventDefault();
             ajxGet('<?= site_url($uri->getSegment(1, 0) . '/formModalTambah') ?>').done(function(respon) {
@@ -161,5 +202,7 @@
                 alert(e.responseText);
             });
         });
+
+
     });
 </script>

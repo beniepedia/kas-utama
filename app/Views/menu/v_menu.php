@@ -32,6 +32,7 @@
                         <div id="nestable-menu">
                             <button type="button" data-action="expand-all" class="btn btn-xs  btn-dark"><i class="fas fa-expand"></i>&nbsp;&nbsp;Expand All</button>
                             <button type="button" data-action="collapse-all" class="btn btn-xs btn-dark"><i class="fas fa-compress"></i>&nbsp;&nbsp;Collapse All</button>
+                            <a href="<?= site_url('hak-akses') ?>" class="btn btn-xs btn-info"><i class="fas fa-shield-alt"></i>&nbsp;&nbsp;Atur Hak Akses</a>
                         </div>
                         <p id="success-indicator" class="alert alert-success mt-2" style="display: none;">
                             <span class="fas fa-check-square"></span>&nbsp;&nbsp; Perubahan menu berhasil disimpan!

@@ -17,7 +17,6 @@ class Level_user extends BaseController
 
     public function index()
     {
-
         $data = [
             'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1)))
         ];
@@ -88,7 +87,8 @@ class Level_user extends BaseController
                 'list_menu' => $menuModel->list_menu(),
             ];
             $view = [
-                'data' => view('level_user/form_modal', $data)
+                'data' => view('level_user/form_modal', $data),
+                'token' => csrf_hash(),
             ];
 
             echo json_encode($view);

@@ -48,7 +48,7 @@ class menuModel extends Model
         }
 
         $return = $this->join('akses a', 'a.id_menu=menu.id_menu', 'left')
-            ->select('menu.nama_menu,menu.level_menu,menu.icon,menu.main_menu,a.*')
+            ->select('menu.nama_menu,menu.level_menu,menu.icon,menu.main_menu,menu.url,a.*')
             ->where('a.id_level_user', $idAkses)
             ->orderby('nama_menu')
             ->get()->getResultArray();

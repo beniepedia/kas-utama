@@ -57,7 +57,7 @@ class Kas_umum extends BaseController
             ];
             $view_data = [
                 'view' => view('/kas_umum/form_modal', $data),
-
+                'token' => csrf_hash(),
             ];
 
             echo json_encode($view_data);
@@ -95,7 +95,6 @@ class Kas_umum extends BaseController
 
     public function tambah()
     {
-
         if ($this->request->isAJAX()) {
             if (isset($_POST['tambah'])) {
                 $data_arr = [
@@ -103,13 +102,14 @@ class Kas_umum extends BaseController
                     'tanggal' => date("Y-m-d", strtotime($this->request->getPost('tanggal'))),
                     'id_kategori' => $this->request->getPost('kategori'),
                     'jenis_kas' => $this->request->getPost('jenis'),
-                    'keterangan' => esc(trim($this->request->getPost('keterangan')))
+                    'keterangan' => esc(trim($this->request->getPost('keterangan'))),
+                    'created_by' => session()->get('userId')
                 ];
 
                 if ($this->request->getPost('jenis') == "M") {
                     $data_arr['masuk'] =  str_replace('.', '', $this->request->getPost('jumlah'));
                 } elseif ($this->request->getPost('jenis') == "K") {
-                    $data_arr['keluar   '] =  str_replace('.', '', $this->request->getPost('jumlah'));
+                    $data_arr['keluar'] =  str_replace('.', '', $this->request->getPost('jumlah'));
                 }
 
                 $this->kasUmumModel->insert($data_arr);
@@ -129,14 +129,23 @@ class Kas_umum extends BaseController
     {
         if ($this->request->isAJAX()) {
             if (isset($_POST['update'])) {
+
                 $data_arr = [
                     'kode_kas_umum' => $this->request->getPost('id'),
                     'tanggal' => date("Y-m-d", strtotime($this->request->getPost('tanggal'))),
                     'id_kategori' => $this->request->getPost('kategori'),
                     'jenis_kas' => $this->request->getPost('jenis'),
-                    'jumlah' => str_replace('.', '', $this->request->getPost('jumlah')),
-                    'keterangan' => esc(trim($this->request->getPost('keterangan')))
+                    'keterangan' => esc(trim($this->request->getPost('keterangan'))),
+                    'updated_by' => session()->get('userId')
                 ];
+
+                if ($this->request->getPost('jenis') == 'M') {
+                    $data_arr['masuk'] = str_replace('.', '', $this->request->getPost('jumlah'));
+                    $data_arr['keluar'] = 0;
+                } elseif ($this->request->getPost('jenis') == 'K') {
+                    $data_arr['masuk'] = 0;
+                    $data_arr['keluar'] = str_replace('.', '', $this->request->getPost('jumlah'));
+                }
 
                 $this->kasUmumModel->save($data_arr);
                 $ouput = [
@@ -146,6 +155,24 @@ class Kas_umum extends BaseController
                 ];
                 echo json_encode($ouput);
             }
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function detail()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $data = [
+                'kas' => $this->kasUmumModel->getDetail($id)
+            ];
+            $view_data = [
+                'data' => view('kas_umum/v_detail', $data),
+                'token' => csrf_hash(),
+            ];
+
+            return json_encode($view_data);
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }

@@ -43,6 +43,14 @@ class KasUmum extends Migration
 			'updated_at' => [
 				'type' => 'DATETIME',
 				'null' => true,
+			],
+			'created_by' => [
+				'type' => 'VARCHAR',
+				'constraint' => 32,
+			],
+			'updated_by' => [
+				'type' => 'VARCHAR',
+				'constraint' => 32,
 			]
 		]);
 

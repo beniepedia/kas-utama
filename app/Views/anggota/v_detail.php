@@ -1,9 +1,8 @@
-<?php helper('datetime') ?>
 <div class="row">
     <div class="col-sm-8">
         <div class="table-responsive">
-            <table class="table table-hover table-borderless">
-                <thead>
+            <table class="table table-hover table-striped table-bordered">
+                <tbody>
                     <tr>
                         <th class="text-right">Nama</th>
                         <td class="text-center">:</td>
@@ -44,7 +43,7 @@
                         <td class="text-center">:</td>
                         <td><?= ($user->updated_at ? indo_fulldate($user->updated_at) : '-'); ?></td>
                     </tr>
-                </thead>
+                </tbody>
 
             </table>
         </div>
