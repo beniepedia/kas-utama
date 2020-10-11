@@ -74,7 +74,7 @@ class Pengguna extends Migration
 
 		$this->forge->addPrimaryKey('id_pengguna');
 		$this->forge->addKey('id_level_user');
-		// $this->forge->addForeignKey('id_level_user', 'level_user', 'id_level_user', 'RESTRICT', 'CASCADE');
+		$this->forge->addForeignKey('id_level_user', 'level_user', 'id_level_user', 'CASCADE', 'RESTRICT');
 		$this->forge->createTable('pengguna');
 	}
 

@@ -51,8 +51,8 @@ class Akses extends Migration
 		$this->forge->addPrimaryKey('id_akses');
 		$this->forge->addKey('id_menu');
 		$this->forge->addKey('id_level_user');
-		$this->forge->addForeignKey('id_menu', 'menu', 'id_menu', 'RESTRICT', 'CASCADE');
-		$this->forge->addForeignKey('id_level_user', 'level_user', 'id_level_user', 'RESTRICT', 'CASCADE');
+		$this->forge->addForeignKey('id_menu', 'menu', 'id_menu', 'CASCADE', 'CASCADE');
+		$this->forge->addForeignKey('id_level_user', 'level_user', 'id_level_user', 'CASCADE', 'CASCADE');
 		$this->forge->createTable('akses');
 	}
 

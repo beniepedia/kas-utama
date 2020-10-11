@@ -96,6 +96,9 @@
                 kategori: {
                     required: true,
                 },
+                jenis: {
+                    required: true,
+                },
                 jumlah: {
                     required: true,
                 },
@@ -113,6 +116,9 @@
                 },
                 jumlah: {
                     required: "Masukan jumlah KAS masuk.",
+                },
+                jenis: {
+                    required: "Pilih jenis kas",
                 },
                 keterangan: {
                     required: "Isi keterangan sumber pemasukan KAS.",

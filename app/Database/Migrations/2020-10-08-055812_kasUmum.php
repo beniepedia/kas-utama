@@ -56,7 +56,7 @@ class KasUmum extends Migration
 
 		$this->forge->addPrimaryKey('kode_kas_umum');
 		$this->forge->addKey('id_kategori');
-		$this->forge->addForeignKey('id_kategori', 'kategori', 'id_kategori', 'RESTRICT', 'CASCADE');
+		$this->forge->addForeignKey('id_kategori', 'kategori', 'id_kategori', 'CASCADE', 'RESTRICT');
 		$this->forge->createTable('kas_umum');
 	}
 
@@ -65,6 +65,6 @@ class KasUmum extends Migration
 	public function down()
 	{
 		$this->forge->dropForeignKey('kas_umum', 'kas_umum_id_kategori_foreign');
-		$this->forge->dropTable('tb_kas_umum');
+		$this->forge->dropTable('kas_umum');
 	}
 }

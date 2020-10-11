@@ -3,20 +3,24 @@
 namespace App\Controllers;
 
 use App\Models\menuModel;
+use App\Models\levelUserModel;
 
 class Menu extends BaseController
 {
     protected $menuModel;
+    protected $levelModel;
 
     public function __construct()
     {
         $this->menuModel = new menuModel();
+        $this->levelModel = new levelUserModel();
     }
 
     public function index()
     {
         $data = [
-            'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1)))
+            'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1))),
+            'level' => $this->levelModel->findAll(),
         ];
         return view('menu/v_menu', $data);
     }
@@ -113,8 +117,10 @@ class Menu extends BaseController
 
     public function tambah()
     {
+
         if ($this->request->isAJAX()) {
 
+            $aksesModel = new \App\Models\aksesModel();
             if ($this->request->getPost('status')) {
                 $aktif = 'Y';
             } else {
@@ -131,6 +137,18 @@ class Menu extends BaseController
             $tambah = $this->menuModel->save($data);
 
             if ($tambah) {
+                $level = $this->request->getPost('level');
+                foreach ($level as $k => $value) {
+                    $dataAkses[] = [
+                        'id_level_user' => $value,
+                        'id_menu' => $this->menuModel->insertID(),
+                        'akses' => 1,
+                        'tambah' => 0,
+                        'edit' => 0,
+                        'hapus' => 0,
+                    ];
+                }
+                $aksesModel->insertBatch($dataAkses);
                 $output['status'] = 'success';
             } else {
                 $output['status'] = 'error';

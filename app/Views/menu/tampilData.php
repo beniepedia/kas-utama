@@ -56,7 +56,7 @@
                         id: id
                     }).done((respon) => {
                         if (respon.status == 1) {
-                            loadData();
+                            location.reload(true);
                         } else {
                             mini_notif('error', 'perintah gagal!');
                         }

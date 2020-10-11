@@ -85,6 +85,17 @@
                                     <input type="text" class="form-control" name="icon" id="icon" placeholder="Masukkan icon menu">
                                 </div>
                             </div>
+                            <div class="form-group row" data-select2-id="46">
+                                <label for="akses" class="col-sm-3 col-form-label">Hak Akses</label>
+                                <div class="col-sm-9">
+                                    <select class="level select2bs4" style="width: 100%;" id="akses" name="level[]" multiple="multiple">
+                                        <?php foreach ($level as $l) : ?>
+                                            <option value="<?= $l['id_level_user'] ?>"><?= $l['nama_level'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+
+                            </div>
                             <div class="form-group row">
                                 <label for="status" class="col-sm-3 col-form-label">status</label>
                                 <div class="icheck-primary d-inline col-sm-9">
@@ -122,6 +133,11 @@
     $(document).ready(function() {
         loadData();
 
+        $('.level').select2({
+            placeholder: 'Pilih level akses',
+            allowClear: true
+        });
+
         $(".dd").nestable({
             maxDepth: 2,
             dropCallback: function(details) {
@@ -157,13 +173,6 @@
                     .always(function() {});
             }
         });
-
-        $("button[name=save]").click(function(e) {
-            e.preventDefault();
-
-
-
-        })
 
         // $(".dd").nestable();
     });
