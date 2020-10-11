@@ -33,15 +33,15 @@
             </tr>
             <tr>
                 <th>Dibuat Oleh</th>
-                <td><?= $kas->created_name ?> | <div class="badge badge-success"><?= $kas->created_level ?></div>
+                <td><?= $kas->created_name . ' <div class="badge badge-success">' . $kas->created_level . '</div>' ?>
                 </td>
             </tr>
             <tr>
                 <th>Diubah Oleh</th>
-                <td><?= $kas->updated_name  ?>| <div class="badge badge-success"><?= $kas->updated_level ?>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                <td><?= $kas->updated_name . ' <div class="badge badge-success">' . $kas->updated_level . '</div>'  ?>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
 </div>

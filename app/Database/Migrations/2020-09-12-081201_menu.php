@@ -21,7 +21,7 @@ class Menu extends Migration
 			'level_menu' => [
 				'type' => 'ENUM',
 				'constraint' => ['main_menu', 'sub_menu'],
-				'default' => 'sub_menu',
+				'default' => 'main_menu',
 			],
 			'url' => [
 				'type' => 'VARCHAR',
@@ -37,13 +37,13 @@ class Menu extends Migration
 				'type' => 'ENUM',
 				'constraint' => ['Y', 'N'],
 				'default' => 'Y',
-
 			],
 			'no_urut' => [
 				'type' => 'INT',
 			],
 			'main_menu' => [
 				'type' => 'INT',
+				'constraint' => 1,
 			],
 			'created_at' => [
 				'type' => 'DATETIME',

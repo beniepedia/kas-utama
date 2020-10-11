@@ -41,7 +41,7 @@ $uri = service('uri'); ?>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item ">
                                         <a href="<?= base_url(strtolower($sm->url)) ?>" class="nav-link <?= ($uri->getSegment(2) == $sm->nama_menu ? 'active' : null) ?>">
-                                            <i class="fas fa-caret-right nav-icon"></i>
+                                            <i class="nav-icon far fa-circle text-warning"></i>
                                             <p>
                                                 <?= ucfirst($sm->nama_menu) ?>
                                             </p>

@@ -49,6 +49,6 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <td><img src="<?= 'writable/user_image/' . $user->photo; ?>" class="img-thumbnail" alt="User photo" width="200"></td>
+        <td><img src="<?= 'writable/user_image/' . $user->photo; ?>" class="img-thumbnail" alt="User photo" width="300"></td>
     </div>
 </div>
