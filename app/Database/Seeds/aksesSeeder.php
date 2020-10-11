@@ -16,6 +16,7 @@ class aksesSeeder extends \CodeIgniter\Database\Seeder
                 'tambah'    => 1,
                 'edit' => 1,
                 'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id_level_user' => 1,
@@ -24,6 +25,7 @@ class aksesSeeder extends \CodeIgniter\Database\Seeder
                 'tambah'    => 1,
                 'edit' => 1,
                 'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id_level_user' => 1,
@@ -32,6 +34,7 @@ class aksesSeeder extends \CodeIgniter\Database\Seeder
                 'tambah'    => 1,
                 'edit' => 1,
                 'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
             ],
             [
                 'id_level_user' => 1,
@@ -40,6 +43,25 @@ class aksesSeeder extends \CodeIgniter\Database\Seeder
                 'tambah'    => 1,
                 'edit' => 1,
                 'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'id_level_user' => 1,
+                'id_menu' => 5,
+                'akses' => 1,
+                'tambah'    => 1,
+                'edit' => 1,
+                'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'id_level_user' => 1,
+                'id_menu' => 6,
+                'akses' => 1,
+                'tambah'    => 1,
+                'edit' => 1,
+                'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
             ],
 
         ];

@@ -33,7 +33,7 @@ class penggunaModel extends Model
     public function getUser()
     {
 
-        $query = $this->where('pengguna.id_level_user', 2)
+        $query = $this->where('pengguna.id_level_user', 3)
             ->join('level_user', 'level_user.id_level_user=pengguna.id_level_user')->orderby('nama', 'ASC');
         return $query->findAll();
     }

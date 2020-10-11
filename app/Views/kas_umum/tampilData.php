@@ -1,11 +1,11 @@
-<?php
-// $saldo = $pemasukan['jumlah'] - $pengeluaran['jumlah'];
-?>
-<div class="row mb-3">
-    <div class="col">
-        <button class="btn btn-primary btn-sm float-right tambah elevation-2"> <i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Data</button>
+<?php $permision = \App\Libraries\Permision::cek_akses(); ?>
+<?php if ($permision['tambah'] == 1) : ?>
+    <div class="row mb-3">
+        <div class="col">
+            <button class="btn btn-primary btn-sm float-right tambah elevation-2"> <i class="fas fa-plus"></i>&nbsp;&nbsp;Tambah Data</button>
+        </div>
     </div>
-</div>
+<?php endif ?>
 <div class="row">
     <div class="col-md-4 col-sm-6 col-12">
         <div class="info-box">

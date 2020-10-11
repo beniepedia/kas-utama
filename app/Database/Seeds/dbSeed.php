@@ -11,6 +11,8 @@ class dbSeed extends Seeder
 
 		$this->call('userLevelSeeder');
 		$this->call('penggunaSeeder');
-		$this->call('JobSeeder');
+		$this->call('menuSeeder');
+		$this->call('settingSeeder');
+		$this->call('aksesSeeder');
 	}
 }

@@ -67,7 +67,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary crop_upload"><i class="fas fa-upload "></i>&nbsp;&nbsp;Crop & upload</button>
+                <button type="button" class="btn btn-primary crop_upload" data-dismiss="modal"><i class="fas fa-upload "></i>&nbsp;&nbsp;Crop & upload</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -125,8 +125,9 @@
                 };
                 ajxPost(url, data).done((data) => {
                     loadData();
+
+                    $('.modal-backdrop').remove();
                     $(".sidebar .user-panel .image").html(data.img_link);
-                    $("#modal_upload_image").modal('hide');
                 }).always(() => {
                     $(this).html('<i class="fas fa-upload "></i>&nbsp;&nbsp;Crop & upload');
                     $(this).prop('disabled', false);

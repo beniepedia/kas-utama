@@ -9,10 +9,13 @@ class userLevelSeeder extends \CodeIgniter\Database\Seeder
     {
         $data = [
             [
-                'nama_level' => 'Administrator',
+                'nama_level' => 'superadmin',
             ],
             [
-                'nama_level' => 'Anggota',
+                'nama_level' => 'administrator',
+            ],
+            [
+                'nama_level' => 'anggota',
             ]
 
         ];

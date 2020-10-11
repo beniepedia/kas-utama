@@ -24,7 +24,7 @@ $uri = service('uri'); ?>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <?php foreach ($db->main_menu() as $mm) : ?>
 
-                <li class="nav-item has-treeview <?= ($mm->url == $uri->getSegment(1)) ? 'menu-open' : '' ?>">
+                <li class="nav-item has-treeview">
                     <a href="<?= base_url($mm->url) ?>" class="nav-link <?= ($uri->getSegment(1, 0) == $mm->url ? 'active' : null) ?>">
                         <i class="nav-icon <?= $mm->icon; ?>"></i>
                         <p>
@@ -40,7 +40,7 @@ $uri = service('uri'); ?>
                             <?php if ($sm->main_menu == $mm->id_menu) : ?>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item ">
-                                        <a href="<?= base_url(strtolower($sm->url)) ?>" class="nav-link <?= ($uri->getSegment(2) == $sm->nama_menu ? 'active' : null) ?>">
+                                        <a href="<?= base_url(strtolower($sm->url)) ?>" class="nav-link <?= ($uri->getSegment(1) == $sm->url ? 'active' : null) ?>">
                                             <i class="nav-icon far fa-circle text-warning"></i>
                                             <p>
                                                 <?= ucfirst($sm->nama_menu) ?>

@@ -13,20 +13,20 @@ class penggunaSeeder extends \CodeIgniter\Database\Seeder
             [
                 'id_pengguna' => Uuid::uuid4()->getHex(),
                 'id_level_user' => 1,
-                'nama' => 'Admin',
-                'email'    => 'admin@test.com',
-                'password' => password_hash('admin', PASSWORD_DEFAULT),
+                'nama' => 'Benie',
+                'email'    => 'superadmin@test.com',
+                'password' => password_hash('123456', PASSWORD_DEFAULT),
                 'status' => 1,
-                'created_at' => date('Y-m-d h:i:s'),
+                'created_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'id_pengguna' => Uuid::uuid4()->getHex(),
                 'id_level_user' => 2,
-                'nama' => 'Anggota',
-                'email'    => 'anggota@test.com',
-                'password' => password_hash('anggota', PASSWORD_DEFAULT),
+                'nama' => 'Ahmad Qomaini',
+                'email'    => 'admin@test.com',
+                'password' => password_hash('123456', PASSWORD_DEFAULT),
                 'status' => 1,
-                'created_at' => date('Y-m-d h:i:s'),
+                'created_at' => date('Y-m-d H:i:s'),
             ]
 
         ];
