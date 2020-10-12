@@ -26,38 +26,8 @@
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-three-tabContent">
                             <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
-                                <div class="form-group row">
-                                    <label for="nama" class="col-sm-4 col-form-label">Nama aplikasi</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan nama aplikasi" value="<?= $setting->nama_app; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="desa" class="col-sm-4 col-form-label">Desa</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="desa" id="desa" placeholder="Masukkan desa" value="<?= $setting->desa; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="kelurahan" id="kelurahan" placeholder="Masukkan kelurahan" value="<?= $setting->kelurahan; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="kecamatan" id="kecamatan" placeholder="Masukkan kecamatan" value="<?= $setting->kecamatan; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="logo" class="col-sm-4 col-form-label">Logo aplikasi</label>
-                                    <div class="col-sm-8">
-                                        <input type="file" name="logo" id="logo" accept="image/*">
-                                    </div>
-                                </div>
-                                <div class="form-group float-right">
-                                    <button class="btn btn-info update">Ubah</button>
+                                <div id="view-setting">
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
@@ -71,35 +41,19 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        sadasd
-                    </div>
                 </div> <!-- /.row -->
             </div>
         </div><!-- /.container-fluid -->
 </section>
 <!-- /.content -->
 <script>
-    $(document).ready(function() {
-        var logoDir = '<?= base_url('writable/uploads/logo.png'); ?>';
-        $("#logo").fileinput({
-            initialPreview: [logoDir],
-            language: "id",
-            theme: 'fas',
-            allowedFileExtensions: ["jpg", "png", "jpeg"],
-            allowedPreviewMimeTypes: ['image/jpeg', 'image/png', 'image/jpg'],
-            maxFileSize: 1000,
-            showUpload: false,
-            initialPreviewAsData: true,
-            dropZoneEnabled: false,
-            previewFileType: "image",
-            browseClass: "btn btn-secondary",
-            browseLabel: "Upload logo",
-            browseIcon: "<i class=\"fas fa-image\"></i> ",
-            removeClass: "btn btn-danger",
-            removeLabel: "Delete",
-            removeIcon: "<i class=\"fas fa-trash\"></i> ",
+    function load() {
+        ajxGet("<?= base_url(service('uri')->getSegment(1) . '/loadData') ?>").done((respon) => {
+            $("#view-setting").html(respon.view);
         });
+    }
+    $(document).ready(function() {
+        load();
     });
 </script>
 <?= $this->endSection() ?>

@@ -13,7 +13,7 @@ class settingModel extends Model
 
     protected $returnType = 'object';
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['nama_app', 'desa', 'kelurahan', 'kecamatan', 'alamat', 'logo'];
 
 
     public function setting()
