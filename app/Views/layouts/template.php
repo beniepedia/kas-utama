@@ -37,6 +37,8 @@ $userBaru = count($userData);
     <!-- Select2 -->
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Datepicker -->
     <link rel="stylesheet" href="<?= base_url('assets') ?>/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
     <!-- adminlte-->
@@ -66,7 +68,7 @@ $userBaru = count($userData);
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition sidebar-mini pace-danger layout-navbar-fixed">
+<body class="hold-transition sidebar-mini pace-danger layout-fixed">
 
     <!-- Site wrapper -->
     <div class="wrapper">
@@ -257,6 +259,8 @@ $userBaru = count($userData);
     <script src="<?= base_url('assets') ?>/plugins/moment/moment.min.js"></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="<?= base_url('assets') ?>/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="<?= base_url('assets') ?>/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- Bootstrap File Input -->
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-fileinput/js/plugins/piexif.js" type="text/javascript"></script>
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-fileinput/js/plugins/sortable.js" type="text/javascript"></script>

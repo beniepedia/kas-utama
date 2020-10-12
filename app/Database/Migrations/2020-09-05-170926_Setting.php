@@ -18,10 +18,6 @@ class Setting extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => 100,
 			],
-			'logo' => [
-				'type' => 'VARCHAR',
-				'constraint' => 100,
-			],
 			'desa' => [
 				'type' => 'VARCHAR',
 				'constraint' => 100,
@@ -36,7 +32,11 @@ class Setting extends Migration
 			],
 			'alamat' => [
 				'type' => 'TEXT',
-			]
+			],
+			'logo' => [
+				'type' => 'VARCHAR',
+				'constraint' => 100,
+			],
 		]);
 
 		$this->forge->addKey('id_settting');

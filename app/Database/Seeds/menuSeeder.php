@@ -64,6 +64,24 @@ class menuSeeder extends \CodeIgniter\Database\Seeder
                 'no_urut' => 6,
                 'main_menu' => 0
             ],
+            [
+                'nama_menu' => 'setting',
+                'level_menu' => 'main_menu',
+                'url' => '#',
+                'icon'    => 'fas fa-cogs',
+                'aktif' => 'Y',
+                'no_urut' => 7,
+                'main_menu' => 0
+            ],
+            [
+                'nama_menu' => 'profile',
+                'level_menu' => 'main_menu',
+                'url' => 'profile',
+                'icon'    => 'fas fa-users',
+                'aktif' => 'Y',
+                'no_urut' => 8,
+                'main_menu' => 0
+            ],
 
         ];
 

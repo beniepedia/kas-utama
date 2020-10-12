@@ -63,6 +63,24 @@ class aksesSeeder extends \CodeIgniter\Database\Seeder
                 'hapus' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
             ],
+            [
+                'id_level_user' => 1,
+                'id_menu' => 7,
+                'akses' => 1,
+                'tambah'    => 1,
+                'edit' => 1,
+                'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'id_level_user' => 1,
+                'id_menu' => 8,
+                'akses' => 1,
+                'tambah'    => 1,
+                'edit' => 1,
+                'hapus' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
 
         ];
 
