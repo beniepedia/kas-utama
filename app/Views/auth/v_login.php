@@ -3,7 +3,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?= site_url(); ?>"><b><?= explode(' ', strtoupper($db->setting()->nama_app))[0]; ?></b><?= explode(' ', strtoupper($db->setting()->nama_app))[1]; ?></a>
+            <a href="<?= site_url(); ?>"><b><?= strtoupper($db->setting()->nama_app); ?></b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">

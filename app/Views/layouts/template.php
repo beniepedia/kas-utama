@@ -206,7 +206,7 @@ $userBaru = count($userData);
             <!-- Brand Logo -->
             <a href="<?= site_url() ?>" class="brand-link elevation-2">
                 <img src="<?= base_url('writable/uploads/logo.png') ?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light"><?= $setting->nama_app; ?></span>
+                <span class="brand-text font-weight-light"><?= strtoupper($setting->nama_app); ?></span>
             </a>
 
             <!-- Sidebar -->

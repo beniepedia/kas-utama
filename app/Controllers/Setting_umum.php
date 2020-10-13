@@ -15,30 +15,16 @@ class Setting_umum extends BaseController
     public function index()
     {
         $data = [
-            'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1)))
+            'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1))),
+            'setting' => $this->settingModel->first(),
         ];
         return view('setting/v_setting', $data);
-    }
-
-    public function loadData()
-    {
-        if ($this->request->isAJAX()) {
-            $data = [
-                'setting' => $this->settingModel->first(),
-            ];
-
-            $view_data = [
-                'view' => view('setting/tampilData', $data)
-            ];
-
-            return json_encode($view_data);
-        }
     }
 
     public function update()
     {
 
-        if ($this->request->isAJAX()) {
+        if ($this->request->getMethod() == 'post') {
             $file = $this->request->getFile('logo');
 
             $uploadDir = WRITEPATH . 'uploads/';
@@ -60,15 +46,7 @@ class Setting_umum extends BaseController
                 'logo' => 'logo.png',
             ];
             $update = $this->settingModel->update(0, $data);
-            if ($update) {
-                $output['status'] = 'success';
-                $output['msg'] = 'pengaturan berhasil disimpan';
-            } else {
-                $output['status'] = 'error';
-                $output['msg'] = 'gagal menyimpan';
-            }
-            $output['token'] = csrf_hash();
-            echo json_encode($output);
+            return redirect()->back();
         }
     }
 }

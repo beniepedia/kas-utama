@@ -3,7 +3,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="<?= site_url(); ?>"><b><?= explode(' ', strtoupper($db->setting()->nama_app))[0]; ?></b><?= explode(' ', strtoupper($db->setting()->nama_app))[1]; ?></a>
+            <a href="<?= site_url(); ?>"><b><?= strtoupper($db->setting()->nama_app); ?></b></a>
         </div>
 
         <div class="card">
