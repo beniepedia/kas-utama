@@ -65,7 +65,43 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                                Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
+                                <form action="<?= base_url(service('uri')->getSegment(1, 0) . '/update') ?>" id="form-setting" method="post">
+                                    <?= csrf_field(); ?>
+                                    <div class="form-group row">
+                                        <label for="protocol" class="col-sm-4 col-form-label">Protokol</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="protocol" id="protocol" placeholder="Masukkan email protocol" value="<?= $email->protocol; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="host" class="col-sm-4 col-form-label">Host</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="host" id="host" placeholder="Masukkan email host" value="<?= $email->host; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="kelurahan" id="kelurahan" placeholder="Masukkan kelurahan" value="<?= $setting->kelurahan; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="kecamatan" id="kecamatan" placeholder="Masukkan kecamatan" value="<?= $setting->kecamatan; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="logo" class="col-sm-4 col-form-label">Logo aplikasi</label>
+                                        <div class="col-sm-8">
+                                            <input type="file" name="logo" id="logo" accept="image/*">
+                                        </div>
+                                    </div>
+                                    <hr class="mt-4">
+                                    <div class="form-group float-right ">
+                                        <button type="submit" class="btn btn-info update">Update</button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-three-messages" role="tabpanel" aria-labelledby="custom-tabs-three-messages-tab">
                                 Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.

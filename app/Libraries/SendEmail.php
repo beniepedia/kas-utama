@@ -2,6 +2,8 @@
 
 namespace App\Libraries;
 
+use App\Models\emailModel;
+
 class SendEmail
 {
 
@@ -9,13 +11,15 @@ class SendEmail
     {
         $email = \Config\Services::email();
 
-        $config['protocol'] = 'smtp';
-        $config['SMTPHost'] = 'smtp.gmail.com';
-        $config['SMTPUser'] = 'beniepedia@gmail.com';
-        $config['SMTPPass'] = 'Medan2020';
-        $config['SMTPPort'] = 465;
-        $config['SMTPCrypto'] = "ssl";
-        $config['mailType'] = 'html';
+        $emailModel = new emailModel();
+
+        $config['protocol'] = $emailModel->get()->protocol;
+        $config['SMTPHost'] = $emailModel->get()->host;
+        $config['SMTPUser'] = $emailModel->get()->user;
+        $config['SMTPPass'] = $emailModel->get()->password;
+        $config['SMTPPort'] = $emailModel->get()->port;
+        $config['SMTPCrypto'] = $emailModel->get()->secure;
+        $config['mailType'] = $emailModel->get()->mailtype;
         $config['newline'] = "\r\n";
 
         return $email->initialize($config);

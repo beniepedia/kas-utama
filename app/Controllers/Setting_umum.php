@@ -2,21 +2,26 @@
 
 namespace App\Controllers;
 
+use App\Models\emailModel;
 
 class Setting_umum extends BaseController
 {
     protected $settingModel;
+    protected $emailModel;
 
     public function __construct()
     {
         $this->settingModel = new \App\Models\settingModel();
+        $this->emailModel = new \App\Models\emailModel();
     }
 
     public function index()
     {
+
         $data = [
             'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1))),
             'setting' => $this->settingModel->first(),
+            'email' => $this->emailModel->get(),
         ];
         return view('setting/v_setting', $data);
     }
