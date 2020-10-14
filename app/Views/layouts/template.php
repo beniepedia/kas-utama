@@ -280,6 +280,8 @@ $userBaru = count($userData);
     <script src="<?= base_url('assets') ?>/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.id.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url('assets') ?>/js/adminlte.min.js"></script>
+    <!-- Bootstrap Switch -->
+    <script src="<?= base_url('assets') ?>/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= base_url('assets') ?>/js/demo.js"></script>
 

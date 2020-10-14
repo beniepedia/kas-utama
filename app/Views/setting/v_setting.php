@@ -13,7 +13,7 @@
                                 <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Umum</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Profile</a>
+                                <a class="nav-link" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">Email</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-three-messages-tab" data-toggle="pill" href="#custom-tabs-three-messages" role="tab" aria-controls="custom-tabs-three-messages" aria-selected="false">Messages</a>
@@ -56,50 +56,92 @@
                                         <label for="logo" class="col-sm-4 col-form-label">Logo aplikasi</label>
                                         <div class="col-sm-8">
                                             <input type="file" name="logo" id="logo" accept="image/*">
+                                            <div class="mt-4">
+                                                <img src="<?= site_url('writable/uploads/' . $setting->logo); ?>" alt="logo" class="img-thumbnail" width="200">
+                                            </div>
                                         </div>
+
                                     </div>
+
                                     <hr class="mt-4">
                                     <div class="form-group float-right ">
-                                        <button type="submit" class="btn btn-info update">Update</button>
+                                        <button type="submit" name="generalsetting" class="btn btn-info update">Update</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-                                <form action="<?= base_url(service('uri')->getSegment(1, 0) . '/update') ?>" id="form-setting" method="post">
+                                <form action="<?= base_url(service('uri')->getSegment(1, 0) . '/update') ?>" id="form-email" method="post">
                                     <?= csrf_field(); ?>
+
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <b>Aktivasi pendaftaran melalui email?</b><br>
+                                                    <small class="text-muted">Kirim link verifikasi email kepada user baru.</small>
+                                                </td>
+                                                <td align="right">
+                                                    <input type="checkbox" name="isregister" <?= ($email->is_register == 1 ? 'checked' : null)  ?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <hr>
                                     <div class="form-group row">
                                         <label for="protocol" class="col-sm-4 col-form-label">Protokol</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="protocol" id="protocol" placeholder="Masukkan email protocol" value="<?= $email->protocol; ?>">
+                                            <input type="text" class="form-control" name="protocol" id="protocol" placeholder="Masukkan email protocol" value="<?= ($email ? $email->protocol : null); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="host" class="col-sm-4 col-form-label">Host</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="host" id="host" placeholder="Masukkan email host" value="<?= $email->host; ?>">
+                                            <input type="text" class="form-control" name="host" id="host" placeholder="Masukkan email host" value="<?= ($email ? $email->host : null); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="kelurahan" class="col-sm-4 col-form-label">Kelurahan</label>
+                                        <label for="user" class="col-sm-4 col-form-label">Username</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="kelurahan" id="kelurahan" placeholder="Masukkan kelurahan" value="<?= $setting->kelurahan; ?>">
+                                            <input type="text" class="form-control" name="user" id="user" placeholder="Masukkan email user" value="<?= ($email ? $email->user : null); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="kecamatan" class="col-sm-4 col-form-label">Kecamatan</label>
+                                        <label for="password" class="col-sm-4 col-form-label">Password</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" name="kecamatan" id="kecamatan" placeholder="Masukkan kecamatan" value="<?= $setting->kecamatan; ?>">
+                                            <input type="text" class="form-control" name="password" id="password" placeholder="Masukkan email password" value="<?= ($email ? $email->password : null); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="logo" class="col-sm-4 col-form-label">Logo aplikasi</label>
+                                        <label for="port" class="col-sm-4 col-form-label">Port</label>
                                         <div class="col-sm-8">
-                                            <input type="file" name="logo" id="logo" accept="image/*">
+                                            <input type="text" class="form-control" name="port" id="port" placeholder="Masukkan email port" value="<?= ($email ? $email->port : null); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="secure" class="col-sm-4 col-form-label">Keamanan</label>
+                                        <div class="col-sm-8">
+                                            <select name="secure" class="form-control">
+                                                <option value="<?= ($email ? $email->secure : null); ?>" selected><?= ($email ? $email->secure : null); ?></option>
+                                                <option value="ssl">SSL</option>
+                                                <option value="tls">TES</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="mailtype" class="col-sm-4 col-form-label">Type email</label>
+                                        <div class="col-sm-8">
+                                            <select name="mailtype" class="form-control">
+                                                <option value="<?= ($email ? $email->mailtype : null); ?>"><?= ($email ? $email->mailtype : null); ?></option>
+                                                <option value="html">HTML</option>
+                                                <option value="text">TEXT</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <hr class="mt-4">
                                     <div class="form-group float-right ">
-                                        <button type="submit" class="btn btn-info update">Update</button>
+                                        <button type="submit" name="emailsetting" class="btn btn-primary btn-sm"><i class="fas fa-save"></i>&nbsp;&nbsp;Update</button>
                                     </div>
                                 </form>
                             </div>
@@ -114,20 +156,17 @@
                 </div> <!-- /.row -->
             </div>
 
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img src="<?= site_url('writable/uploads/' . $setting->logo); ?>" alt="logo" style="width:80%;">
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div> <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
 <script>
     $(document).ready(function() {
+
+
+        $("input[data-bootstrap-switch]").each(function() {
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+
         $("#logo").fileinput({
             language: "id",
             theme: 'fas',

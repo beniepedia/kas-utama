@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\emailModel;
-
 class Setting_umum extends BaseController
 {
     protected $settingModel;
@@ -21,7 +19,7 @@ class Setting_umum extends BaseController
         $data = [
             'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1))),
             'setting' => $this->settingModel->first(),
-            'email' => $this->emailModel->get(),
+            'email' => $this->emailModel::get(),
         ];
         return view('setting/v_setting', $data);
     }
@@ -30,28 +28,53 @@ class Setting_umum extends BaseController
     {
 
         if ($this->request->getMethod() == 'post') {
-            $file = $this->request->getFile('logo');
+            if (isset($_POST['generalsetting'])) {
+                $file = $this->request->getFile('logo');
 
-            $uploadDir = WRITEPATH . 'uploads/';
+                $uploadDir = WRITEPATH . 'uploads/';
 
-            if ($file->getError() != 4) {
-                if (file_exists($uploadDir . 'logo.png')) {
-                    unlink($uploadDir . 'logo.png');
+                if ($file->getError() != 4) {
+                    if (file_exists($uploadDir . 'logo.png')) {
+                        unlink($uploadDir . 'logo.png');
+                    }
+
+                    $file->move($uploadDir, 'logo.png');
                 }
 
-                $file->move($uploadDir, 'logo.png');
+                $data = [
+                    'nama_app' => esc(trim($this->request->getVar('nama'))),
+                    'desa' => esc(trim($this->request->getVar('desa'))),
+                    'kelurahan' => esc(trim($this->request->getVar('kelurahan'))),
+                    'kecamatan' => esc(trim($this->request->getVar('kecamatan'))),
+                    'alamat' => esc(trim($this->request->getVar('alamat'))),
+                    'logo' => 'logo.png',
+                ];
+                $this->settingModel->update(0, $data);
+                return redirect()->back();
             }
 
-            $data = [
-                'nama_app' => esc(trim($this->request->getVar('nama'))),
-                'desa' => esc(trim($this->request->getVar('desa'))),
-                'kelurahan' => esc(trim($this->request->getVar('kelurahan'))),
-                'kecamatan' => esc(trim($this->request->getVar('kecamatan'))),
-                'alamat' => esc(trim($this->request->getVar('alamat'))),
-                'logo' => 'logo.png',
-            ];
-            $update = $this->settingModel->update(0, $data);
-            return redirect()->back();
+            if (isset($_POST['emailsetting'])) {
+
+                if ($this->request->getVar('isregister')) {
+                    $isregister = 1;
+                } else {
+                    $isregister = 0;
+                }
+
+                $data = [
+                    'protocol' => esc(trim($this->request->getPost('protocol'))),
+                    'host' => esc(trim($this->request->getPost('host'))),
+                    'user' => esc(trim($this->request->getPost('user'))),
+                    'password' => ($this->request->getPost('password')),
+                    'port' => ($this->request->getPost('port')),
+                    'secure' => esc(trim($this->request->getPost('secure'))),
+                    'mailtype' => esc(trim($this->request->getPost('mailtype'))),
+                    'mailtype' => esc(trim($this->request->getPost('mailtype'))),
+                    'is_register' => $isregister,
+                ];
+                $this->emailModel->update(0, $data);
+                return redirect()->back();
+            }
         }
     }
 }

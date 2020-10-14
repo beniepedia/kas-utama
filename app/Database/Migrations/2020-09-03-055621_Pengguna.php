@@ -17,7 +17,7 @@ class Pengguna extends Migration
 			'id_level_user' => [
 				'type' => 'INT',
 				'constraint' => 11,
-				'default' => 2,
+				'default' => 3,
 			],
 			'nama' => [
 				'type' => 'VARCHAR',

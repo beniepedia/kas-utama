@@ -15,8 +15,9 @@ class emailModel extends Model
 
     protected $useTimestamps = false;
 
-    public function get()
+    public static function get()
     {
-        return $this->first();
+        $db = new emailModel();
+        return $db->first();
     }
 }

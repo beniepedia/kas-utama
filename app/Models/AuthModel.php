@@ -8,6 +8,8 @@ use Ramsey\Uuid\Uuid;
 
 use App\Libraries\SendEmail as sendEmail;
 
+use App\Models\emailModel;
+
 
 class AuthModel extends Model
 {
@@ -79,7 +81,7 @@ class AuthModel extends Model
                     // cek user belum verifikasi
                     $this->delete_attempt($user['id_pengguna']);
                     $result['error'] = 5;
-                    $result['msg'] = 'Email anda belum diverifikasi. Silahkan cek inbox emial anda untuk verifikasi email.';
+                    $result['msg'] = 'Email anda belum diverifikasi. Silahkan cek inbox email anda untuk verifikasi email atau hubungi kami.';
                 }
             } else {
                 $this->delete_attempt($user['id_pengguna']);
@@ -114,9 +116,14 @@ class AuthModel extends Model
         $this->insert($data);
         if ($this->affectedRows() == 1) {
             if ($this->_token_insert($email, $token)) {
-                sendEmail::system('verifikasi', $email, $nama, $token);
+                if (emailModel::get()->is_register == 1) {
+                    sendEmail::system('verifikasi', $email, $nama, $token);
+                    $output['msg'] = "Kami sudah mengirimkan email verifikasi ke <b>{$email}</b>. Cek kotak masuk email anda dan lakukan verifikasi.";
+                } else {
+                    $output['msg'] = "Registrasi berhasil, akun anda akan segera kami aktifkan.";
+                    $this->_delete_user_token($email);
+                }
                 $output['status'] = 'success';
-                $output['msg'] = "Kami sudah mengirimkan email verifikasi ke <b>{$email}</b>. Cek kotak masuk email anda dan lakukan verifikasi.";
             } else {
                 $this->where('email', $email)->delete();
                 $output['status'] = 'error';
