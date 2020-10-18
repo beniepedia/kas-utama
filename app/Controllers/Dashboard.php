@@ -13,20 +13,6 @@ class Dashboard extends BaseController
     public function index()
     {
 
-        $jatuhtempo = "2020-10-20";
-        $bulan = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'];
-
-
-        for ($i = 1; $i <= count($bulan); $i++) {
-            $tempo = date("Y-m-d", strtotime("+$i month", strtotime($jatuhtempo)));
-            echo $tempo . "<br>";
-            echo date("Y", strtotime($tempo)) . "<br>";
-        }
-
-
-        die;
-
-
 
         $data = [
             'title' => str_replace('-', ' ', ucfirst(service('uri')->getSegment(1))),
