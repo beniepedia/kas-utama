@@ -5,13 +5,6 @@
 $jatuhtempo = date("Y-m-d");
 
 
-
-// for ($i = 1; $i <= count($bulan); $i++) {
-//     $tempo = date("Y-n-d", strtotime("+$i month", strtotime($jatuhtempo)));
-//     echo $tempo . "<br>";
-//     echo date("Y", strtotime($tempo)) . "<br>";
-// }
-
 ?>
 
 
@@ -22,6 +15,11 @@ $jatuhtempo = date("Y-m-d");
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="">Anggota</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Jenis iuran</label>
                             <input type="text" class="form-control">
                         </div>
                     </div>
