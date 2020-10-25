@@ -19,14 +19,20 @@ $jatuhtempo = date("Y-m-d");
                             <div class="form-group row">
                                 <label for="anggota" class="col-sm-4 col-form-label">Anggota</label>
                                 <div class="col-sm-8">
-                                    <input type="text" name="anggota" class="form-control" id="anggota">
+                                    <select name="pengguna[]" multiple="multiple" id="anggota" style="width:100%;" class="select2bs4 form-control">
+                                        <option value="all">Semua anggota
+                                            <div class="badge badge-primary"><?= count($anggota); ?></div>
+                                        </option>
+                                        <?php foreach ($anggota as $a) : ?>
+                                            <option value="<?= $a->id_pengguna ?>"><?= ucfirst($a->nama) ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="iuran" class="col-sm-4 col-form-label">Jenis Iuran</label>
                                 <div class="col-sm-8">
                                     <select name="jenis_iuran" id="iuran" class="select2bs4 form-control" style="width:100%;">
-                                        <option value="">Pilih</option>
                                         <?php foreach ($kategori as $k) : ?>
                                             <option value="<?= $k->id_kategori ?>"><?= ucfirst($k->nama_kategori) ?></option>
                                         <?php endforeach ?>
@@ -85,7 +91,12 @@ $jatuhtempo = date("Y-m-d");
             bulan.val(bulanAll.val());
         });
 
-        $("select").select2();
+        $("#iuran").select2();
+
+        $('#anggota').select2({
+            placeholder: 'Pilih anggota',
+            allowClear: true
+        });
 
     });
 </script>
